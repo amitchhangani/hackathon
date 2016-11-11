@@ -5,12 +5,12 @@ var mongoose = require('mongoose'),
 
 
 
-var VehichleSchema = new Schema({
+var VehicleSchema = new Schema({
 	name: {type:String},
 	type: {type:String},
-	capacity: {type:String},
+	capacity: {type:Number},
 	collection_points: [],
 	created: {type:Number, default:Date.now()}
 })
 
-var Vehichle = module.exports = mongoose.model('Vehichle', VehichleSchema);
+var Vehicle = module.exports = mongoose.model('Vehicle', VehicleSchema);

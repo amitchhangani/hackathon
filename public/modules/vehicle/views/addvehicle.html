@@ -1,0 +1,51 @@
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="getAllVehicles()">
+    <section class="content-header">
+        <h1>add a vehicle record<small></small></h1>
+    </section>
+    <section class="content clearfix">
+        <div class="box">
+            <div class="content clearfix">
+                <div class="clearfix row-10">
+                    <div class="mob-grid-6">
+                        <div class="form-group">
+                            <label class="labelColor">Vehicle UIN<span class="requiredClass">*</span></label>
+                            <input type="text" name="name" class="form-control mob-grid-12" autofocus ng-model="vehicle.name"  required>
+                            <span ng-if="vehicle.name.$error.required && !vehicle.name.$pristine" class="help-block requiredClass ng-scope" style="">Unique identification number is required.</span>
+                            <span class="hlep-block">**Unique identification number of a vehicle.</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelColor">Vehicle Type<span class="requiredClass">*</span></label>
+                            <select name="type" class="form-control mob-grid-12" ng-model="vehicle.type"  required>
+                                <option value="Big Truck">Big Truck</option>
+                                <option value="Medium Truck">Medium Truck</option>
+                                <option value="Small Truck">Small Truck</option>
+                            </select>
+                            <span ng-if="vehicle.type.$error.required && !vehicle.type.$pristine" class="help-block requiredClass ng-scope" style="">Vehicle type is required.</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelColor">Vehicle Capacity<span class="requiredClass">*</span></label>
+                            <input type="text" name="capacity" class="form-control mob-grid-12" ng-model="vehicle.capacity"  required>
+                            <span ng-if="vehicle.capacity.$error.required && !vehicle.capacity.$pristine" class="help-block requiredClass ng-scope" style="">Vehicle capacity is required.</span>
+                            <span class="hlep-block">** Capcity is the number of pickup locations a vehicle will cater.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" ng-click="addvehicle()">Add Vehicle</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <table ng-table="tableParams" class="table" show-filter="true">
+                        <tr ng-repeat="vehicle in $data">
+                            <td title="'UIN'" filter="{ name: 'text'}" sortable="'name'">
+                                {{vehicle.name}}</td>
+                            <td title="'Type'" filter="{ type: 'text'}" sortable="'type'">
+                                {{vehicle.type}}</td>
+                            <td title="'Capacity'" filter="{ type: 'number'}" sortable="'capacity'">
+                                {{vehicle.capacity}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
