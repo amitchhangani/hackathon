@@ -27,7 +27,7 @@ hackathon.controller("vehiclesController", [ '$scope','$http','$state','$rootSco
 	var vehicledata = [{name: "Moroni", age: 50} , {name: "Another", age: 23}];	
 	/*init ng-tables*/
 	$scope.getAllVehicles = function(){
-		$http.get('fetchvehicles').then(function(response) {
+		$http.get('/fetchvehicles').then(function(response) {
 			if(response.data.status == 1) {
 				$scope.tableParams = new NgTableParams({
 		            page: 1,
