@@ -23,7 +23,9 @@ exports.create = function(req, res){
 					if(err){
 						res.send({status:0,message:err});
 					}else{
-						res.send({status:1,message:"success",data:dumpYard});
+				//		res.send({status:1,message:"success",data:dumpYard});
+                        req.query.city = req.body.city;
+                        exports.fetch(req,res);
 						City.findOne({_id:req.body.city}).exec(function(err,city){
 							if(!err){
 								if(!city.dumpYards){
@@ -35,6 +37,7 @@ exports.create = function(req, res){
 						})				
 					}
 				})
+                
 			}
 		})		
 	}
