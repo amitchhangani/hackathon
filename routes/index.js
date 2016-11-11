@@ -6,6 +6,7 @@ var dumpYard = require('./../app/controllers/dumpYards.js');
 var collectionCenter = require('./../app/controllers/collectionCenters.js');
 
 var vehicle = require('./../app/controllers/vehicles.js');
+var user = require('./../app/controllers/users.js');
 
 
 /* GET home page. */
@@ -39,5 +40,8 @@ router.delete('/deleteCollectionCenter/:collectionCenterId',collectionCenter.del
 
 router.post('/addvehicle', vehicle.create);
 router.get('/fetchvehicles', vehicle.fetch);
+
+router.post('/adduser', user.create);
+router.get('/fetchusers', user.fetch);
 
 module.exports = router;
