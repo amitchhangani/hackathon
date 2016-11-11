@@ -10,13 +10,9 @@
         <div class="box">
             <div class="content clearfix">
                 <div>
-                    <div class="row">
-                        Enter an address: <br/>
-                       <input places-auto-complete size=80
-                       ng-model="address"
-                       component-restrictions="{country:'in'}"
-                       on-place-changed="placeChanged()" />
-                       <span class="help-block">**drag the pin in case you want to change the location</span>
+                    <div class="row" style="padding:10px">
+                       <h1> Sanitation Plan of {{$root.city.name}}</h1>
+                       
                     </div>
                     
                      <div class="row">
