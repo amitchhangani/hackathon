@@ -5,30 +5,21 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('shopify:server');
-var https = require('https');
-var fs=require('fs');
-var path=require('path');
-var hskey = fs.readFileSync(path.join(__dirname+'/../hacksparrow-key.pem'));
-var hscert = fs.readFileSync(path.join(__dirname+'/../hacksparrow-cert.pem'));
-
-var options = {
-    key: hskey,
-    cert: hscert
-};
+var debug = require('debug')('hackathon:server');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '5513');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = https.createServer(options,app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
