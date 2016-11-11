@@ -34,7 +34,7 @@ exports.fetch = function(req, res){
 		if(err){
 			res.send({status:0,message:err});
 		}else{
-			if(city){
+			if(city.length){
 				res.send({status:1,message:"success",data:city});
 			}else{
 				res.send({status:0,message:"No City found",data:city});
