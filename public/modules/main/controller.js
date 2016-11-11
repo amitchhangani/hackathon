@@ -6,9 +6,11 @@ hackathon.controller("mainController", [ '$scope','$http','$state','$rootScope',
             $rootScope.city = response.data.data;
 			console.log('id = ',$rootScope.city);
         }else{
-            $state.go('addCity');
+            //$state.go('addCity');
         }
     }, function (response) {
         alert('error while getting api data');
     })
+	
+	
 }])
