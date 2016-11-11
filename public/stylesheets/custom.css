@@ -1,0 +1,103 @@
+.ng-table th{
+    text-align: left;
+}
+.marginTop10 {
+    margin-top: 10px;
+}
+
+.form-validation .ng-valid.ng-dirty {
+    border-color: #23ae89;
+}
+.form-validation .ng-invalid.ng-dirty {
+    border-color: #e94b3b;
+}
+
+#fixed {
+    height: 300px;
+    overflow: auto;
+    /*border: 1px solid #DDD;*/
+}
+
+.scroll-container {
+	padding: 7px 35px  ; 
+	text-align: left;
+}
+
+.scroll-container a {
+    color: #fff;
+}
+
+.left-section-btn {
+    margin: 9px 0px;
+    padding: 0 15px;
+}
+
+.input-group .sidebar-search-btn {
+    width: 75%
+}
+.add-aide-btn {
+    border-radius: 0 4px 4px 0;
+    height: 34px;
+}
+.btn.sidebarBtn:hover {
+    color: skyblue;
+    font-size: 15px;
+}
+
+.form-error {
+    color: red;
+}
+.height150 img{
+    max-height: 135px;
+    max-width: 135px;
+}
+.height150{
+    position: relative;
+}
+.delete-btn {
+    background-color: rgba(0, 0, 0, 0.51);
+    color: #fff;
+    padding: 6px;
+    position: absolute;
+    right: 15px;
+    top: 0px;
+}
+.ng-invalid.ng-dirty {
+    border-color: red;
+}
+.requiredClass{
+  color:#ff0000;
+}
+
+/* Background for spinner */
+.spinner:before { 
+  background-color: rgba(49, 37, 37, 0.6);
+  border-radius: 6px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  content: " ";
+}
+.spinner{
+	position: fixed !important;
+}
+.add-more{display:none !important;position:absolute;top:-11px;right:5px;padding:0 !important;}
+.add-more .fa{font-size:14px}
+.sidebar_tab .tab-pane.active .add-more{display:block !important}
+.patientBtn {
+    position: relative;
+    top: 20px;
+}
+.invalid.ng-touched{
+  border-color: red;
+}
+.fa.fa-trash-o{
+    color: #ff0000;
+}
+.forget-pop{float: left;width: 65%}
+.forget-pop .form-control{width:100%}
+.button-grp{float:left;width:35%;margin-top:25px;text-align: right}
+.button-grp .btn:last-of-type{margin-left: 10px}
+.button-grp .btn i{margin:2px 5px 0 0;vertical-align: middle }

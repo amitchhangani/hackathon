@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="hackathon">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hackathon</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<style type="text/css">
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak {
+			display: none !important;
+		}
+		
+		[ng\:cloak],
+		[ng-cloak],
+		.ng-cloak {
+			display: none !important;
+		}
+		
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak,
+		.ng-hide {
+			display: none !important;
+		}
+	</style>
+	<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" href="/stylesheets/_all-skins.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome.css" />
+	<link rel="stylesheet" href="/stylesheets/ionicons.min.css">
+	<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+	<link rel="stylesheet" href="/stylesheets/icheck/square/blue.css">
+	<link rel="stylesheet" href="/stylesheets/ng-table.css">
+	<link rel="stylesheet" href="/stylesheets/custom.css">
+	<link rel="stylesheet" href="/font/font-awesome.css">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="/javascripts/js/html5shiv.min.js"></script>
+		<script src="/javascripts/js/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="/javascripts/js/angular.min.js" type="text/javascript"></script>
+	<script src="/javascripts/js/angular-ui-router.min.js" type="text/javascript"></script>
+	<script src="/javascripts/js/jquery-2.2.3.min.js" type="text/javascript"></script>
+	<script src="/javascripts/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/app.js" type="text/javascript"></script>
+	<script src="/javascripts/constants.js" type="text/javascript"></script>
+	
+	<script src="/javascripts/js/ng-map.min.js" type="text/javascript"></script>
+	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCNZNdJlTb16L5qMi1WJWSWbPvUMeDlSIE&libraries=places"></script>
+	<!--<script src="/javascripts/js/autocomplete.js"></script>-->
+	<!--<script src="/javascripts/js/angucomplete-alt.js"></script>-->
+	<script src="/directives/google.js" type="text/javascript"></script>
+	<!--<script src="/javascripts/communication.js" type="text/javascript"></script>-->
+	<script src="/javascripts/js/ui-bootstrap.js" type="text/javascript"></script>
+	<!--Controllers-->
+	<script src="/modules/city/controller.js" type="text/javascript"></script>
+	<script src="/modules/main/controller.js" type="text/javascript"></script>
+
+	<!--services-->
+	<!--<script src="/modules/city/service.js" type="text/javascript"></script>-->
+
+</head>
+
+<body class="skin-blue fixed sidebar-mini" ng-controller="mainController">
+	<span us-spinner spinner-key="spinner-1"></span>
+	<div class="wrapper">
+		<div ui-view="header" ng-cloak></div>
+		<div ui-view="sidebar" ng-cloak></div>
+		<div ui-view="" ng-cloak></div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="getAllInvites()">
+    <section class="content-header">
+        <h1>add a city to proceed<small></small></h1>
+    </section>
+    <section class="content clearfix">
+        <div class="box">
+            <div class="content clearfix">
+                <div class="clearfix row-10">
+                    <div class="mob-grid-6">
+                        <div class="form-group">
+                            <label class="labelColor">City<span class="requiredClass">*</span></label>
+                            <input type="text" name="first_name" googleplace123 class="form-control mob-grid-12" autofocus ng-model="map.data"  required>
+                            <span ng-if="addAgency.first_name.$error.required && !addAgency.first_name.$pristine" class="help-block requiredClass ng-scope" style="">Name is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" ng-click="addCity()">Add City</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

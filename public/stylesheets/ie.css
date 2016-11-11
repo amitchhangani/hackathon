@@ -1,0 +1,16 @@
+
+@media all and (-ms-high-contrast:none){
+ .sidebar_tab .tab-body .form-control { 
+ 	max-width: 100%;
+ 	width: auto;
+  } /* IE10 */
+ *::-ms-backdrop, .foo { 
+ 	max-width: 100%;
+ 	width: auto;
+  } /* IE11 */
+
+  .alertbox{
+  	left: 50%;
+    transform: translate(-50%, 0);
+  }
+}

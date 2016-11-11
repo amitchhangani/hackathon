@@ -1102,7 +1102,6 @@ fieldset {
     color: #fc6568
 }
 
-
 .user-list li.blue:before {
     background-color: #64b5f6
 }
@@ -1238,7 +1237,7 @@ fieldset {
 .date-input > input {
     border: medium none;
     border-radius: 3px;
-    padding: 12px 12px 11px;
+    padding: 12px;
     width: 100%
 }
 
@@ -2581,6 +2580,12 @@ ul.tab li a:focus,
 .borderLi {
     border-bottom: 1px solid #555;
 }
+
+.daterangepicker.dropdown-menu.ltr.show-calendar.opensright {
+    border: 4px solid #3ca2f4;
+}
+
+
 /***1-9-2016***/
 
 .wickedpicker__title {
@@ -2689,7 +2694,11 @@ ul.tab li a:focus,
   z-index: 555;}*/
 
 .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus{color:#95cdf9}
+
+
+.daterangepicker.opensright:before,.daterangepicker.opensright::after {right:60px;left:auto;}
 .pad_btm15{padding-bottom:15px;}
+.daterangepicker.dropdown-menu.ltr.show-calendar.opensright{right:45px !important;left:auto !important;}
 .mob-grid-1.arrow_right {padding-top: 37px;width: 4%;}
 .slick-prev::before, .slick-next::before{color:transparent !important}
 .slick-prev, .slick-next{width:30px;height:30px;}
@@ -2918,10 +2927,10 @@ box-shadow:         -4px 6px 8px 0px rgba(0, 0, 0, 0.4);
 .snap_chat table{border:none;width:100%;text-align:center}
 .table-responsive > table th{color:#1976d2;font-size:14px;font-weight:normal;background-color:#fff;text-transform:uppercase;border-right:3px solid #ebebeb}
 .snap_chat > table > thead  td{background:#fff;border-right:3px solid #ebebeb;text-transform:uppercase;color:#1976d2;font-weight:bold;font-size:14px;vertical-align:middle;text-align:center}
-.snap_chat > table > tbody > tr > td{color:#9e9e9e;padding:22px 0;border-right:3px solid #ebebeb;border-bottom:1px solid #ebebeb;vertical-align:middle}
+.snap_chat > table > tbody > tr > td{color:#9e9e9e;padding:22px 0;border-right:1px solid #ebebeb;border-bottom:1px solid #ebebeb;vertical-align:middle}
 .snap_chat > table .sub-heading td{background:#efefef;color:#727272;border-right:3px solid #fff}
 .snap_chat > table .fa{font-size:1.4em}
-/*.snap_chat > table > tbody > tr > td:first-of-type, .snap_chat > table > tbody > tr > .ClientName, .snap_chat > table > tbody > tr > .status { border-right: 3px solid #ebebeb;}*/
+.snap_chat > table > tbody > tr > td:first-of-type, .snap_chat > table > tbody > tr > .ClientName, .snap_chat > table > tbody > tr > .status { border-right: 3px solid #ebebeb;}
 .snap_chat > table > tbody > tr > td.verify a:hover i{color:#63b3f3}
 .snap_chat > table  td:last-of-type{border-right:none}
 .snapchat_list ul li > div .small{font-size:10px}
@@ -3065,20 +3074,17 @@ box-shadow:         -1px -2px 25px 1px rgba(0, 0, 0, 0.45);position:absolute;top
 /*****27-9-2016 aide.html*****/
 .snapchat_list{float:left;width:100%;background-color:#fff;-webkit-box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.4);
                -moz-box-shadow:    0px 0px 4px 3px rgba(0, 0, 0, 0.4);
-               box-shadow:         0px 0px 4px 3px rgba(0, 0, 0, 0.4);max-height:560px;overflow-y:auto;min-height:566px
-               }
-
-.snapchat_list ul li{border-bottom:1px solid #ebebeb;list-style:none;float:left;width:100%;background:#fff;padding:25px 10px;}
+               box-shadow:         0px 0px 4px 3px rgba(0, 0, 0, 0.4);max-height:560px;overflow-y:auto}
+.snapchat_list ul li{padding:20px 25px;border-bottom:1px solid #ebebeb;list-style:none;float:left;width:100%}
 .snapchat_list ul li.thick-seperator{border-bottom: 1px solid #999999}
 .snapchat_list .up-down-arrow{margin-top:-1px;margin-left:5px}
 .snapchat_list .up-down-arrow{font-size:1.4em}
-.snapchat_list ul li p{font-size:14;color:#727272;float:left;width:50%}
-.snapchat_list ul li > div{width:50%;font-size:14px;text-align:right}
+.snapchat_list ul li p{font-size:14;color:#727272;float:left;width:93%}
+.snapchat_list ul li > div{width:7%;font-size:14px}
 .snapchat_list ul li.lsit-head p{text-transform:uppercase;font-weight:700;color:#1976d2;margin-top: 3px}
 .snapchat_list .up-down-arrow a{line-height: 1px}
 .total-percent{margin-top: 5px}
-/*.snapchat_list ul li:last-of-type{border:none}*/
-.snapchat_list ul li.lsit-head{padding:20px 25px;}
+.snapchat_list ul li:last-of-type{border:none}
 
 .performance-chart {
     background: #fff none repeat scroll 0 0;
@@ -3122,7 +3128,7 @@ table{border-collapse: collapse;
 .tab-height1 .slick-slide a{overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    white-space: nowrap;display:block;}
+    white-space: nowrap}
 .tab-height1 .slick-slide.slick-current a{color:#3fa4f4}
 .date-td .select-style-arrow{width:50%;height:37px}
 .date-td .select-style-arrow select{padding: 5px 1px}
@@ -3244,17 +3250,7 @@ box-shadow:         -2px 4px 7px 0px rgba(0, 0, 0, 0.29);
 .multiple-items .mob-grid-6{padding:0}
 .multiple-items .mob-grid-6:nth-child(n){padding-left:10px}
 .slider-nav .slick-list{margin:0 auto;float:none;text-align:center}
-.head-line{background-color:#efefef!important; border-bottom: 1px solid #d6d4d4 !important;}
-.head-line li{background-color:#fff}
-.padding-wrap, .inner-list li{padding:20px 25px}
-.inner-list{border:none!important}
-.padding-wrap{float: left;width: 100%!important;text-align: left!important;}
-.padding-wrap, .inner-list li{padding:20px 25px}
-.inner-list{border:none!important}
-.padding-wrap{float: left;width: 100%!important;text-align: left!important;}
-.padding-wrap, .inner-list li{padding:20px 25px}
-.inner-list{border:none!important}
-.padding-wrap{float: left;width: 100%!important;text-align: left!important;}
+.head-line{background-color:#efefef}
 .snapchat_list ul .head-line p, .snapchat_list ul .head-line span{text-transform:uppercase;color:#727272}
 .patient-perform ul, .patient-aide-sel ul, .patient-aide-list ul{float:left;width:100%;border:1px solid #d0d0d0}
 .patient-aide-sel .lsit-head > div{display:inline-block;float:left;margin-right:15px;width:auto}
@@ -3391,7 +3387,7 @@ box-shadow:         -6px 11px 30px 0px rgba(0, 0, 0, 0.6);}
  
 
 /*****10-10-2016*****/
-/*.snap_chat.duty-new  table  tr  td{border-right:3px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:20px 0;}*/
+.snap_chat.duty-new  table  tr  td{border-right:3px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:20px 0;}
 .vertiacl-middle{vertical-align: middle!important}
 .snap_chat.duty-new > table > tbody > tr > td:last-of-type{border-right:none}
 .snap_chat.duty-new > table > thead > tr > th{border-bottom:1px solid #ebebeb}
@@ -3428,7 +3424,7 @@ box-shadow:         -6px 11px 30px 0px rgba(0, 0, 0, 0.6);}
 
 #activityHoverBox .arrow_box::after, #activityHoverBox .arrow_box::before{right: 43%}
 #activityHoverBox .arrow_box{border:0px solid #47a8f5;padding: 0;height: 37px;text-align: center}
-#activityHoverBox .arrow_box .select-style-arrow{width:75px;background: #47A8F5 url("../images/drop-down-white.png") no-repeat scroll 95% 51%;border:none;border-right:1px solid #fff}
+#activityHoverBox .arrow_box .select-style-arrow{width:75px;background-color: #47A8F5;border:none;border-right:1px solid #fff}
 #activityHoverBox .select-style-arrow select {;color:#fff;height:37px;width:70px;font-family: fontawesome;padding: 0 8px ;text-align: center}
 #activityHoverBox .select-style-arrow select option{background-color:#ebebeb;color:#a4a4a4; border-bottom: 1px solid #fff;
     padding: 11px;
@@ -3444,156 +3440,3 @@ box-shadow:         -6px 11px 30px 0px rgba(0, 0, 0, 0.6);}
 .media .select-style-arrow select{text-align:center;padding-right:15px}
 .note-form .greybtn{margin:15px auto 0}
 i{cursor: pointer;}
-
-/*****19-10-2016*****/
-#activityHoverBox .arrow_box span{position:absolute;left:0;right:0;text-align:center;top:13px}
-.up-down-arrow a.active i.fa-caret-down{color:#1e88e5}
-.wickedpicker__controls__control-up{margin:5px 0}
-.wickedpicker__controls__control-down{margin:2px 0}
-.date-input .uib-month .btn.active, .date-input .uib-month .btn:active,  .date-input .uib-year .btn.active, .date-input .uib-year .btn:active{border-radius:5px}
-.date-input .uib-left:active, .date-input .uib-right:active{border-radius:0;background-color:transparent}
-.date-input .uib-datepicker .uib-title{border-radius:0;background-color:#49A9F5!important}
-.content .callout-danger{margin:20px 0 0}
-.content .callout-danger h4{text-align:center}
-.content .callout-danger ul li{list-style:none}
-
-/*****24-10-2016&*****/
-.dropdown{  float: left;
-    height: 37px;
-    position: relative;
-    width: auto;border-right:1px solid #fff}
-.dropdown-toggle{background:#47A8F5;border:none;padding:9px 0  9px 5px;padding:9px 11px;width:70px;height:100%;color:#fff}
-.caret {
-    border-left: 5px solid transparent;left:auto!important;right:5px!important;position:absolute;
-    border-right: 5px solid transparent;
-    border-top: 5px dashed;
-    display: inline-block;
-    height: 0;
-    vertical-align: middle;color:#fff;
-    width: 0;float:right;top:17px
-}
-.drop-menu {
-    background-clip: padding-box;position:absolute;top:15px;
-    background-color: #fff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
-    float: left;
-    font-size: 14px;
-    left: 0;
-    list-style:none;
-    min-width: 71px;
-    position: absolute;
-    text-align:center;
-    top: 100%;
-    z-index: 1005;
-	right:0;
-}
-.drop-menu li{list-style:none;float: left; width: 100%;}
-.drop-menu li a{   background-color: #ebebeb;
-    border-bottom: 1px solid #fff;
-    float: left;
-    padding: 12px 5px;
-    width: 100%;}
-.drop-menu li:last-of-type a{border:none}
-.drop-menu li a:hover{background-color:#64b5f6;color:#fff}
-.drop-menu li a i{ color:#a4a4a4}
-.drop-menu li a:hover i{color:#fff}
-.detail{ display: inline-block;float: left;margin-top: 10px;text-align: center;width: 175px;}
-.inline-form .dropdown-toggle{background:#fff;border: 1px solid #dadada;color:#727272}
-.inline-form .dropdown-toggle .caret{background:url("../images/drop-down.png") no-repeat scroll 95% 51%;border:none;height:11px;width:19px;top:14px}
-
-
-/***Safari Hack***/
-@media screen and (-webkit-min-device-pixel-ratio:0) { .date-input > input{padding: 12px 12px 13px;}} 
-
-.modal-custom-content{
-  z-index:55555
-        
-}
-.modal-custom-content .modal-content{width:90%;bottom:10%}
-/*****26-10-2016*****/
-.daterangepicker {top:0!important;bottom:0!important;right:0!important;border:none;border-radius:0;background-color:#49A9F5;color:#fff;margin:0;position:fixed;left:auto!important;
-box-shadow:-6px 11px 30px 0 rgba(0, 0, 0, 0.6);width:378px}
-.daterangepicker .calendar{float:left;width:100%;max-width:100%;margin:0}
-.daterangepicker.ltr .calendar.right{display:none}
-.daterangepicker .calendar-table{background:transparent;border:none!important;padding:0!important;}
-.daterangepicker td, .daterangepicker th{border-radius:50%;border:none;height:37px}
-.daterangepicker td{height:48px}
-.daterangepicker td.active, .daterangepicker td.active:hover{background-color:rgba(255, 255, 255, 255) !important;color:#64b5f6;border-radius:50%;}
-.daterangepicker td.start-date{border-radius:50%;}
-.daterangepicker td.in-range{background-color:transparent}
-.daterangepicker td.in-range .date-wrap {
-    background: rgba(255, 255, 255, 0.25) none repeat scroll 0 0;
-    color: #fff;
-
-    padding-top: 17px;
-}
-.daterangepicker td.in-range.end-date .date-wrap{background-color:#fff !important;color:#64b5f6 !important}
-.ranges .range_inputs button {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;border: medium none; color: #ffffff;padding: 10px;font-size:18px;}
-/*****27-10-2016*****/
-.ranges .range_inputs button:hover{background: #fff none repeat scroll 0 0;  border: 0 none;border-radius: 10px;  padding: 10px;}
-
-.daterangepicker td.active.start-date .date-wrap::after {
-background:rgba(255, 255, 255, 0.25) none repeat scroll 0 0;
-content: "";
-height: 100%;
-right: 0;
-position: absolute;
-top: 0;
-width: 50%;
-z-index: 0;
-}
-.daterangepicker td.active.start-date, .daterangepicker td.active.end-date  {
-background: transparent !important;
-border-radius: 0;
-position: relative;
-color:#000;font-weight:700
-}
-
-.daterangepicker td.active.end-date  .date-wrap::before {
-  background: rgba(255, 255, 255, 0.25) none repeat scroll 0 0;
-  border-radius: 0;
-  content: "";
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 41%;
-  z-index: 0;
-}
-
-.daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date{background-color:transparent;color:#fff !important}
-.daterangepicker td.available:hover, .daterangepicker th.available:hover{background:transparent none repeat scroll 0 0 !important;color:#fff;}
-.daterangepicker .calendar table {border: medium none;}
-.image-set img {background: #50abf5 none repeat scroll 0 0 !important;}
-#activityHoverBox .arrow_box span{position:static;}
-#activityHoverBox .arrow_box button span.caret {position: absolute;top: 18px;}
-#activityHoverBox .arrow_box span.detail {overflow: hidden;padding: 0 25px;text-align: center;text-overflow: ellipsis;white-space: nowrap;width: 165px;}
-.table-responsive.plan-table {overflow: visible;}
-div.form-group div.sideheading.active{background:#43A6f5;color:#fff;}
-.table-responsive.plan-table td.com_cls{width:200px;}
-.table-responsive.plan-table td.com_cls2,.table-responsive.plan-table td.com_cls3{width:220px;}
-.table-responsive.plan-table td.com_cls1{width:250px;}
-.uib-clear { display: none;}
-.duty_table tbody tr td{border-right:3px solid #ebebeb;}
-.arrow1_select{width:70px !important;}
-.calendar.left .daterangepicker_input{display:none;}
-.daterangepicker .calendar.left{padding-top:105px;}
-.daterangepicker th.month{font-size:25px;}
-.cancelAuto {
-    width: 100% !important;
-}
-[disabled="disabled"] {
-    cursor: not-allowed;
-}      
-.calendar-table thead tr th{padding-bottom:15px} 
-.date-wrap{position:relative;margin:7.5px auto;height:48px;padding-top:15px}
-.daterangepicker  .active .date-wrap {background: #fff none repeat scroll 0 0;
-    border-radius: 50%;
-    color: #64b5f6;
-
-    padding-top: 16px;
-    position: relative;
-    width: 100%;
-    z-index: 18;}
-.daterangepicker tr td.in-range:first-of-type .date-wrap {border-top-left-radius:25px!important;border-bottom-left-radius:25px!important}
-.daterangepicker tr td.in-range:last-of-type .date-wrap {border-top-right-radius:25px!important;border-bottom-right-radius:25px!important}

@@ -1,0 +1,224 @@
+@media(min-width: 801px){
+	.wrapper aside{
+		position: fixed;
+		left: 0;
+		top: 0;
+		height:  100%;
+	}
+
+	.side-close .wrapper aside{
+		left: -220px;
+	}
+
+	.side-close .wrapper > section.main-body,
+	.side-close .wrapper > header nav{
+		margin-left: 0;
+	}
+
+	.side-close .wrapper > header nav .togglebtn{
+		left: 10px;
+	}
+	
+	.sidebar .nav > div,
+	.sidebar .nav .nav-scroll{
+		height: 100% !important;
+	}
+}
+
+/*****10-10-2016*****/
+@media screen (min-width: 1200px) {
+	.table-responsive{max-width:100%}
+	}
+@media(max-width:1280px){
+	.inline-checkbox .mob-grid-4{width:49%}
+	.input-del .mob-grid-10{width:75%}
+	.input-del .mob-grid-2{width:25%}
+	.media-wrap{margin:auto 10px}
+	.custom-min, .label-side{margin-right:10px}
+	.day-wrap{width:14.24%}
+	}
+@media(max-width:1180px){
+		.cal-tab ul li button{width:70px}
+		.table-responsive{max-width:1170px}
+		}
+@media(max-width:1080px){
+	.week-wrap{width:100%}
+.media-wrap {
+    border: medium none;
+    margin: 25px 0;
+    padding: 0;
+    width: 80%;
+}
+.right-wrap{ width: 15%;float:left;   margin-top: 18px;}
+.plan-table{min-width: 1080px}
+	}
+@media(max-width: 980px){
+	
+	.small-logo,
+	.main_menus{
+		display: block;
+	}
+	
+	header .headermenu{
+		position: relative;
+		padding: 14px 7px 0px;
+	}
+ 
+
+	.headermenu ul,
+	.logobox{
+		display: none;
+	}
+
+
+	.wrapper aside{
+		left: -220px;
+	}
+
+	.side-close .wrapper aside{
+		left: 0px;
+	}
+
+	.wrapper > header nav{
+		margin-left: 0;
+	}
+
+	.headermenu li{
+		font-size: 12px;
+	}
+
+	.wrapper > section.main-body,
+	.wrapper > header nav{
+		margin-left: 0;
+	}
+
+	.wrapper > header nav{
+		padding-left: 40px;
+		position: relative;
+	}
+
+	.wrapper > header nav .togglebtn{
+		left: 10px;
+	}
+
+	.side-close .wrapper aside{
+		left: 0;
+	}
+
+	.side-close .wrapper > section.main-body,
+	.side-close .wrapper > header nav{
+		left: 220px;
+		margin-left: 0;
+	}
+
+	.side-close .wrapper > header nav .togglebtn{
+		left: 10px;
+		outline: none !important
+	}
+
+	.side-close .wrapper > header nav {
+	    padding-left: 40px;
+	}
+	.select-aide .mob-grid-11{width:80%}
+	.select-aide .mob-grid-1{width:20%}
+	.position-rel .select-style {width: 40%!important;}
+	
+}
+
+@media(max-width: 768px){
+
+
+	.accordion  .accordion-content{
+		padding:0 20px;
+	}
+
+	.accordion .accordion-panel{
+		padding-left: 13px;
+	    padding-top: 14px;
+	    padding-bottom: 13px;
+	}
+
+	.profile_client-form {
+    	padding: 25px 20px 20px;
+    }
+
+    .profile_client-form  .form-group label:before{
+    	left: -26px;
+    }
+
+    [class^=mob-] {
+	    width: 100%;
+	}
+
+	.profile_client-form .no-circle .form-group label:before{
+		display: block;
+	}
+
+	.careplan-content .careplan-tab ul.tab-head .tab-btn{
+		padding: 0 7px;
+		font-size: 12px;
+	}
+
+	.careplan-content .careplan-tab ul.tab-head {
+	    padding: 8px 7px 0 4px;
+	}
+
+	.careplan-content .careplan-tab ul.tab-head .tab-btn a{
+		font-size:  12px;
+		font-weight: normal;
+	}
+	.profile_client-form .checkbox-label  label::before{left:0}
+		.cal-profile > div{margin:5px auto}
+		.select-style-arrow1.fl_left{width:160px;}
+		.profile_client-form .input-del .form-group label::before{left:-37px}
+		.profile_client-form .input-del.no-circle .mob-grid-2 .form-group label::before{display:none}
+		.mob-grid-1.arrow_right {margin-bottom: 30px;padding-top: 0;text-align: center;transform: rotate(90deg);width: 100%;}
+		.profile_client-form .select-aide .no-circle.mob-grid-1 .form-group label::before{display:none}
+		.select-aide .mob-grid-11{width:90%}
+		.select-aide .mob-grid-1{width:10%}
+		.mob-grid-1.arrow_right{text-align:center;width:100%;transfrom:rotate(90deg);padding-top:0;margin-bottom:25px}
+		.position-rel .select-style {width: 45% ;}
+        .task-failed .modal-content{width:570px}
+		.wickedpicker{width:226px}
+}
+@media (max-width: 600px){
+	.inline-checkbox .mob-grid-4{width:100%}
+	.plan-tab ul{float:left;width:100%;margin-top:10px}
+	.right-wrap{margin-top:45px}
+	.day-wrap{width:14.2%}
+	.user-name, .task-location{width:100%;margin-bottom:15px}
+	.task-failed .modal-content{width:460px}
+	.monthaly-failed, .outer-wrap, .fail-reason{width:100%}
+	.cal-tab .uib-datepicker-popup li button{width:25px;height:25px;margin:0}
+	.cal-tab  td.custom-divForDatePicker > div{width:365px}
+	.cal-tab .custom-divForDatePicker .uib-daypicker table tr th, .cal-tab .custom-divForDatePicker .uib-daypicker table tr td, .cal-tab .custom-divForDatePicker .uib-year, .cal-tab .custom-divForDatePicker .uib-month{padding:5px}
+}
+@media (max-width: 480px){
+	.careplan-content .careplan-tab ul.tab-head .tab-btn { padding: 0 0px;font-size: 12px;}
+	.cal-tab ul li button {margin: 10px;width: 134px;}
+        .task-failed .modal-content{width:360px}
+		.uib-daypicker table tr th, .uib-daypicker table tr td, .uib-year, .uib-month{padding:0px}
+}
+
+@media (max-width: 420px){
+	.day-tags a{margin-right:2px}
+	.cal-tab  td.custom-divForDatePicker > div{width:295px}
+	.cal-tab ul li button {width: 100px;}
+}
+@media (max-width: 380px){
+	.position-rel .select-style {width: 40% ;}
+	.media-list li{width:100%;margin:5px 0}
+}
+@media (max-width: 360px){
+	.custom-radio {
+	     margin: 0 0.7em 0 0;
+	}
+	.cal-tab ul li button{width:200px;margin:10px 0}
+	.day-wrap{width:32.8%;border-right:none;margin-left:1px}
+	.day-wrap:last-of-type{border-right:1px solid #e6e6e6}
+	/*.day-wrap{width:30%;border-right:none;margin-left:1px}*/
+    .task-failed .modal-content{width:300px}
+	.cal-tab .custom-divForDatePicker .uib-daypicker table tr th, .cal-tab .custom-divForDatePicker .uib-daypicker table tr td, .cal-tab .custom-divForDatePicker .uib-year, .cal-tab .custom-divForDatePicker .uib-month{padding:3px}
+	.cal-tab .uib-datepicker-popup li .uib-month button{width:76px}
+	.cal-tab td.custom-divForDatePicker > div{width:100%}
+}
