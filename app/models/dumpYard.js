@@ -6,10 +6,12 @@ var mongoose = require('mongoose'),
 
 
 var DumpYardSchema = new Schema({
-	name:String,
-	latlong:String,
-	created:Number,
-	deleted:Boolean
+	name:{type:String},
+	lat:{type:String},
+	long:{type:String},
+	city: {type: Schema.Types.ObjectId, ref: 'City'},
+	created:{type:Number},
+	deleted:{type:Boolean,default:0}
 })
 
 var DumpYard = module.exports = mongoose.model('DumpYard', DumpYardSchema);

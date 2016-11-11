@@ -12,22 +12,33 @@ exports.create = function(req, res){
 			res.send({status:0,message:"City latitude required"});
 		}
 	}else{
-		City(req.body).save(function(err){
+		City(req.body).save(function(err,city){
 			if(err){
 				res.send({status:0,message:err});
 			}else{
-				res.send({status:1,message:"success"});
+				res.send({status:1,message:"success",data:city});
 			}
 		})
 	}
 }
 
 exports.fetch = function(req, res){
-	City.findOne({},function(err,city){
+	var query = {};
+	if(req.params.cityId){
+		query._id=req.query.cityId;
+	}
+	if(req.params.cityName){
+		query.name=req.query.cityName;
+	}
+	City.findOne(query,function(err,city){
 		if(err){
 			res.send({status:0,message:err});
 		}else{
-			res.send({status:1,message:"success",data:city});
+			if(city){
+				res.send({status:1,message:"success",data:city});
+			}else{
+				res.send({status:0,message:"No City found",data:city});
+			}			
 		}
 	})
 }
