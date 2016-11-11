@@ -14,13 +14,28 @@ exports.create = function(req, res){
 			res.send({status:0,message:"Collection Center City required"});
 		}
 	}else{
-		CollectionCenter(req.body).save(function(err,collectionCenter){
-			if(err){
-				res.send({status:0,message:err});
+		CollectionCenter.findOne({lat:req.body.lat, long:req.body.long,deleted:0}).exec(function(err,col){
+			if(col){
+				res.send({status:0,message:"CollectionCenter of same location already exists"})
 			}else{
-				res.send({status:1,message:"success",data:collectionCenter});
+				CollectionCenter(req.body).save(function(err,collectionCenter){
+					if(err){
+						res.send({status:0,message:err});
+					}else{
+						res.send({status:1,message:"success",data:collectionCenter});
+						City.findOne({_id:req.body.city}).exec(function(err,city){
+							if(!err){
+								if(!city.collectionCenters){
+									city.collectionCenters=[];							
+								}
+								city.collectionCenters.push(collectionCenter._id);
+								city.save();
+							}
+						})
+					}
+				})
 			}
-		})
+		})		
 	}
 }
 
@@ -63,13 +78,19 @@ exports.edit = function(req, res){
 		if(req.body.city){
 			update.city=req.body.city;			
 		}
-		CollectionCenter.findOneAndUpdate({_id:req.params.id},update,{upsert:false,multi:false},function(err){
-			if(err){
-				res.send({status:0,message:err});
+		CollectionCenter.findOne({lat:req.body.lat, long:req.body.long, _id:{$ne:req.params.id}}).exec(function(err,col){
+			if(col.length){
+				res.send({status:0,message:"CollectionCenter of same location already exists"})
 			}else{
-				res.send({status:1,message:"success"});
+				CollectionCenter.findOneAndUpdate({_id:req.params.id},update,{upsert:false,multi:false},function(err){
+					if(err){
+						res.send({status:0,message:err});
+					}else{
+						res.send({status:1,message:"success"});
+					}
+				})
 			}
-		})
+		})		
 	}
 }
 
