@@ -4,11 +4,34 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require("fs");
+
+var app = express();
+var mongoose = require('mongoose');
+var db = mongoose.connect("mongodb://localhost/municipalCorporation");
+
+// Include All models
+var models_path = __dirname + '/app/models';
+var walk = function(path) {
+    fs.readdirSync(path).forEach(function(file) {
+        //console.log(file);
+        var newPath = path + '/' + file;
+        var stat = fs.statSync(newPath);
+        if (stat.isFile()) {
+            if (/(.*)\.(js$|coffee$)/.test(file)) {
+                require(newPath);
+            }
+        } else if (stat.isDirectory()) {
+            walk(newPath);
+        }
+    });
+};
+walk(models_path);
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
