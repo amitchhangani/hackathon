@@ -8,6 +8,9 @@ var collectionCenter = require('./../app/controllers/collectionCenters.js');
 var vehicle = require('./../app/controllers/vehicles.js');
 var user = require('./../app/controllers/users.js');
 
+var vehicleStat = require('./../app/controllers/vehicleStats.js');
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,5 +46,12 @@ router.get('/fetchvehicles', vehicle.fetch);
 
 router.post('/adduser', user.create);
 router.get('/fetchusers', user.fetch);
+
+
+
+
+router.get('/addRandomDataToVehicleStat',vehicleStat.addRandomData);
+router.get('/fetchVehicleStats',vehicleStat.fetch);
+
 
 module.exports = router;

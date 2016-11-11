@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
     CollectionCenter = mongoose.model('CollectionCenter'),
     City = mongoose.model('City');
 
+
 exports.create = function(req, res){
 	if(!req.body.name || !req.body.lat || !req.body.long || !req.body.city){
 		if(!req.body.name){
