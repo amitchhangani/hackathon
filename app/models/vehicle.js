@@ -9,7 +9,7 @@ var VehichleSchema = new Schema({
 	name: {type:String},
 	type: {type:String},
 	capacity: {type:String},
-	collection_points: [],
+	collectionCenters: [{type: Schema.Types.ObjectId, ref: 'CollectionCenter'}],
 	created: {type:Number, default:Date.now()}
 })
 

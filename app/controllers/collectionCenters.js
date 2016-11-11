@@ -12,11 +12,13 @@ exports.create = function(req, res){
 			res.send({status:0,message:"Collection Center latitude required"});
 		}else if(!req.body.city){
 			res.send({status:0,message:"Collection Center City required"});
+		}else if(!req.body.vehicle){
+			res.send({status:0,message:"Collection Center vehicle required"});
 		}
 	}else{
 		CollectionCenter.findOne({lat:req.body.lat, long:req.body.long,deleted:0}).exec(function(err,col){
 			if(col){
-				res.send({status:0,message:"CollectionCenter of same location already exists"})
+				res.send({status:0,message:"Collection Center of same location already exists"})
 			}else{
 				CollectionCenter(req.body).save(function(err,collectionCenter){
 					if(err){
@@ -55,7 +57,7 @@ exports.fetch = function(req, res){
 				res.send({status:0,message:"No Collection Centers Found",data:collectionCenter});
 			}else{
 				res.send({status:1,message:"success",data:collectionCenter});
-			}			
+			}
 		}
 	})
 }
@@ -77,6 +79,9 @@ exports.edit = function(req, res){
 		}
 		if(req.body.city){
 			update.city=req.body.city;			
+		}
+		if(req.body.vehicle){
+			update.vehicle=req.body.vehicle;	
 		}
 		CollectionCenter.findOne({lat:req.body.lat, long:req.body.long, _id:{$ne:req.params.id}}).exec(function(err,col){
 			if(col.length){

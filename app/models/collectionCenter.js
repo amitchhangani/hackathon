@@ -11,7 +11,8 @@ var CollectionCenterSchema = new Schema({
 	long:{type:String},
 	city: {type: Schema.Types.ObjectId, ref: 'City'},
 	created:{type:Number},
-	deleted:{type:Boolean,default:0}
+	deleted:{type:Boolean,default:0},
+	vehicle:{type: Schema.Types.ObjectId, ref: 'Vehicle'};
 })
 
 var CollectionCenter = module.exports = mongoose.model('CollectionCenter', CollectionCenterSchema);
