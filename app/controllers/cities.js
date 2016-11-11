@@ -30,11 +30,11 @@ exports.fetch = function(req, res){
 	if(req.params.cityName){
 		query.name=req.query.cityName;
 	}
-	City.findOne(query,function(err,city){
+	City.findOne(query).populate("dumpYards",{},{"deleted":0}).populate("collectionCenters",{},{"deleted":0}).exec(function(err,city){
 		if(err){
 			res.send({status:0,message:err});
 		}else{
-			if(city.length){
+			if(city){
 				res.send({status:1,message:"success",data:city});
 			}else{
 				res.send({status:0,message:"No City found",data:city});

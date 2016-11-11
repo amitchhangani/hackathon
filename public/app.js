@@ -9,7 +9,6 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
 			$http.get('/fetchCity').then(function (res) {
 				console.log(res)
 				if(res.data.data){
-					
 					setTimeout(function () {
 						if($state.current.name == 'addCity'){
 							$state.go('city')
@@ -33,6 +32,25 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
 		}
         $urlRouterProvider.otherwise("/");
 		$stateProvider
+			
+			.state('addCity', {
+				url: "/addCity",
+				views: {
+					"": {
+						templateUrl: '/modules/city/views/addCity.html',
+						controller: "cityController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
 			.state('city', {
 				url: "/",
 				views: {
@@ -51,12 +69,30 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
 					}
 				}
 			})
-			.state('addCity', {
-				url: "/addCity",
+			.state('addDump', {
+				url: "/addDump",
 				views: {
 					"": {
-						templateUrl: '/modules/city/views/addCity.html',
-						controller: "cityController",
+						templateUrl: '/modules/dumpYard/views/dumpYard.html',
+						controller: "dumpController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
+			.state('addGC', {
+				url: "/addGC",
+				views: {
+					"": {
+						templateUrl: '/modules/garbageCollection/views/garbageCollection.html',
+						controller: "gcController",
 						resolve: {
 							checkCity: checkCity
 						}
@@ -88,4 +124,4 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
 				}
 			});
 
-	}])
+	}]);

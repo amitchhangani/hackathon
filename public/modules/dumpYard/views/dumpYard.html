@@ -1,0 +1,49 @@
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="initGMap()">
+    <section class="content-header">
+        <h1>City sanitation plan<small>Area division and navigation plan</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">City plan</li>
+        </ol>
+    </section>
+    <section class="content clearfix">
+        <div class="box">
+            <div class="content clearfix">
+                <div>
+                    <div class="row" style="padding:10px;">
+                        Enter a Location to add a new dumping yard and click save button after adjusting the location of markerr: <br/>
+                        <input places-auto-complete size=80
+                        ng-model="address"
+                        component-restrictions="{country:'in'}"
+                        on-place-changed="placeChanged()" />
+                        <span class="help-block">**drag the pin in case you want to adjust the location</span>
+                        <button class= "btn btn-info" ng-click="saveDumpYard()">Save Dump Yard Location</button>
+                    </div>
+                    
+                     <div class="row">
+                        <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13" style="display: block;min-height: 550px">
+                             <marker ng-if="showNewMarker.val" position="{{pinlat}}, {{pinlng}}" 
+                             draggable="true"
+                             on-dragstart="dragStart()"
+                             on-dragend="dragEnd()"
+                             title="New Dump Yard"
+                             ></marker>
+                             <marker ng-repeat="dumpYard in dumpYards"
+                                     position="{{dumpYard.lat}}, {{dumpYard.long}}"
+                                     draggable="false"
+                                     title="{{dumpyard.name}}"
+                                     on-click="showDetail(dumpYard)">
+                             </marker>
+                             <info-window id="foo-iw">
+                                 <div>
+                                     <br/>Address: {{currentDump.name}}
+                                     <br/><a  ng-click="delDump(shopData)">Delete Dump yard location</a>
+                                 </div>
+                             </info-window>
+                        </ng-map>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

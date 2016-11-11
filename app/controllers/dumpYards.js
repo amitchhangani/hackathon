@@ -15,13 +15,31 @@ exports.create = function(req, res){
 			res.send({status:0,message:"DumpYard City required"});
 		}
 	}else{
-		DumpYard(req.body).save(function(err,dumpYard){
-			if(err){
-				res.send({status:0,message:err});
+		DumpYard.findOne({lat:req.body.lat, long:req.body.long,deleted:0}).exec(function(err,dump){
+			if(dump){
+				res.send({status:0,message:"DumpYard of same location already exists"})
 			}else{
-				res.send({status:1,message:"success",data:dumpYard});				
+				DumpYard(req.body).save(function(err,dumpYard){
+					if(err){
+						res.send({status:0,message:err});
+					}else{
+				//		res.send({status:1,message:"success",data:dumpYard});
+                        req.query.city = req.body.city;
+                        exports.fetch(req,res);
+						City.findOne({_id:req.body.city}).exec(function(err,city){
+							if(!err){
+								if(!city.dumpYards){
+									city.dumpYards=[];							
+								}
+								city.dumpYards.push(dumpYard._id);
+								city.save();
+							}
+						})				
+					}
+				})
+                
 			}
-		})
+		})		
 	}
 }
 
@@ -42,13 +60,19 @@ exports.edit = function(req, res){
 		if(req.body.city){
 			update.city=req.body.city;			
 		}
-		DumpYard.findOneAndUpdate({_id:req.params.id},update,{upsert:false,multi:false},function(err){
-			if(err){
-				res.send({status:0,message:err});
+		DumpYard.findOne({lat:req.body.lat, long:req.body.long, _id:{$ne:req.params.id}}).exec(function(err,dump){
+			if(dump.length){
+				res.send({status:0,message:"DumpYard of same location already exists"})
 			}else{
-				res.send({status:1,message:"success"});
+				DumpYard.findOneAndUpdate({_id:req.params.id},update,{upsert:false,multi:false},function(err){
+					if(err){
+						res.send({status:0,message:err});
+					}else{
+						res.send({status:1,message:"success"});
+					}
+				})
 			}
-		})
+		})		
 	}
 }
 

@@ -8,8 +8,8 @@ var mongoose = require('mongoose'),
 var VehicleSchema = new Schema({
 	name: {type:String},
 	type: {type:String},
-	capacity: {type:Number},
-	collection_points: [],
+	capacity: {type:String},
+	collectionCenters: [{type: Schema.Types.ObjectId, ref: 'CollectionCenter'}],
 	created: {type:Number, default:Date.now()}
 })
 
