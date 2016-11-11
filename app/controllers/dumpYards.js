@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    DumpYard = mongoose.model('DumpYard');
+    DumpYard = mongoose.model('DumpYard'),
+    City = mongoose.model('City');
 
 
 exports.create = function(req, res){
@@ -18,7 +19,34 @@ exports.create = function(req, res){
 			if(err){
 				res.send({status:0,message:err});
 			}else{
-				res.send({status:1,message:"success",data:dumpYard});
+				res.send({status:1,message:"success",data:dumpYard});				
+			}
+		})
+	}
+}
+
+exports.edit = function(req, res){
+	if(!req.body.name && !req.body.lat && !req.body.long && !req.body.city){
+		res.send({status:0,message:"Nothing to Update"})
+	}else{
+		var update={};
+		if(req.body.name){
+			update.name=req.body.name;
+		}
+		if(req.body.long){
+			update.long=req.body.long;
+		}
+		if(req.body.lat){
+			update.lat=req.body.lat;
+		}
+		if(req.body.city){
+			update.city=req.body.city;			
+		}
+		DumpYard.findOneAndUpdate({_id:req.params.id},update,{upsert:false,multi:false},function(err){
+			if(err){
+				res.send({status:0,message:err});
+			}else{
+				res.send({status:1,message:"success"});
 			}
 		})
 	}
@@ -36,7 +64,7 @@ exports.fetch = function(req, res){
 		if(err){
 			res.send({status:0,message:err});
 		}else{
-			if(!dumpYard){
+			if(!dumpYard.length){
 				res.send({status:0,message:"No Dumpyards Found",data:dumpYard});
 			}else{
 				res.send({status:1,message:"success",data:dumpYard});

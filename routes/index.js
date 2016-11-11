@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var city = require('./../app/controllers/cities.js');
 var dumpYard = require('./../app/controllers/dumpYards.js');
+var collectionCenter = require('./../app/controllers/collectionCenters.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,6 +19,18 @@ router.get('/fetchDumpYards',dumpYard.fetch);
 
 router.post('/createDumpYard',dumpYard.create);
 
+router.post('/editDumpYard/:id',dumpYard.edit);
+
 router.delete('/deleteDumpYard/:dumpYardId',dumpYard.delete);
+
+
+
+router.get('/fetchCollectionCenters',collectionCenter.fetch);
+
+router.post('/createCollectionCenter',collectionCenter.create);
+
+router.post('/editCollectionCenter/:id',collectionCenter.edit);
+
+router.delete('/deleteCollectionCenter/:collectionCenterId',collectionCenter.delete);
 
 module.exports = router;
