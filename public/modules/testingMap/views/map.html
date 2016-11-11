@@ -1,0 +1,175 @@
+<div class="wrapper" ng-init="filters();  mapKey();" ng-cloak>
+    <header ng-bind-html="settings.header">
+    </header>
+    <div class="content-page">
+        <div class="content p-t-0">
+            <div class="masthead">
+                <h1 class="masthead-subtitle"><strong>{{settings.page_title}}</strong></h1>
+            </div>
+            <!-- /.page-header -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet portlet-boxed">
+                        <!-- /.portlet-header -->
+                        <div ng-init="filters();">
+                            <form name="searchForm">
+                                <div class="form-group">
+                                    <label>{{settings.text}}:</label>
+                                    <input type="text" ng-model="search.postal" placeholder="{{settings.default_text}}" name="postal" required/>
+                                    <span class="customColor" ng-show="searchForm.postal.$touched && searchForm.postal.$invalid" class="customColor">Please enter your location address/postal</span>
+                                    <label class="p-l-15">Distance:</label>
+                                    <select ng-model="search.distance" ng-show="settings.unit == 'KM'" name="distance" ng-required="settings.unit == 'KM'">
+                                        <option value="" selected>Select distance</option>
+                                        <option value="25">25 Km</option>
+                                        <option value="50">50 Km</option>
+                                        <option value="100">100 Km</option>
+                                        <option value="200">200 Km</option>
+                                        <option value="1000">No Limits</option>
+                                    </select>
+                                    <select ng-model="search.distance" ng-show="settings.unit == 'MI'" name="distance" ng-required="settings.unit == 'MI'">
+                                        <option value="" selected>Select distance</option>
+                                        <option value="1">1 Miles</option>
+                                        <option value="25">25 Miles</option>
+                                        <option value="50">50 Miles</option>
+                                        <option value="100">100 Miles</option>
+                                        <option value="200">200 Miles</option>
+                                        <option value="1000">No Limits</option>
+                                    </select>
+                                    <span>Please select distance</span>
+                                    <label class="p-l-15">Results:</label>
+                                    <select ng-model="search.results">
+                                        <option value="" selected>Select Results limit</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <span class="customColor" ng-show="searchForm.distance.$touched && storeForm.distance.$invalid">Select distance</span>
+                                    <button class="btn btn-success btn-sm" ng-click="findAllstoresLoc()" ng-disabled="searchForm.$invalid"><i class="glyphicon glyphicon-search"></i> {{settings.search_button}}</button>
+                                </div>
+                            </form>
+                            <div>
+                                <div class="checkbox">
+                                    <label class="checkbox-inline" ng-repeat="fil in filters">
+                                        <input type="checkbox" name="radio-set-1" ng-model="filters[$index].value" ng-click="editFilters(fil)"> {{ fil.filter }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" style="width: 68%; float:right; height:{{settings.map_height}}">
+                                <label ng-if="showdirections">Mode of Travel: </label>
+                                <select ng-model="travelMode" ng-init="travelMode='DRIVING'" ng-show="showdirections">
+                                    <option value="DRIVING">Driving</option>
+                                    <option value="WALKING">Walking</option>
+                                    <!--   <option value="BICYCLING">Bicycling</option>
+                                            <option value="TRANSIT">Transit</option> -->
+                                </select>
+                                <div ng-if="!mapLaodKey" map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load="https://maps.google.com/maps/api/js??libraries=placeses,visualization,drawing,geometry,places&language={{settings.direction_language}}&key=AIzaSyAMLh92ql0g84pRrtn7U4wHnP7WSkboo8E">
+                                    <ng-map zoom="12" center="current-position" style="display:block;height:500px;">
+                                        <marker ng-if="showMarker" id='{{stores.id}}' ng-repeat="stores in positions" position="{{stores.pos}}" title=" {{stores.title}}" ng-model="map.markers" on-click="showDetail(stores)" animation="DROP" style="color:blue;" centered="true"></marker>
+                                        <info-window id="foo-iw" class="{{settings.popup_theme}}">
+                                            <div ng-non-bindable="" class="{{settings.popup_theme}}">
+                                                <b>{{shopData.store_name}}</b>
+                                                <br/>Address: {{shopData.address}}
+                                                <br/>City: {{shopData.city}}
+                                                <br/>State: {{shopData.state}}
+                                                <br/>Country:{{shopData.country}}
+                                                <br/><span ng-show="shopData.postal">Postal :{{shopData.postal}}</span>
+                                                <br/><span ng-show="shopData.phone">Phone:{{shopData.phone}}</span>
+                                                <br/><span ng-show="shopData.fax">Fax:{{shopData.fax}}</span>
+                                                <br/><span ng-show="shopData.website">Website:{{shopData.website}}</span>
+                                                <br/><span ng-show="shopData.working_days.length > 0">Working Days:{{shopData.working_days}}</span>
+                                                <br/>Email :{{shopData.email}}
+                                                <br/><span ng-show="shopData.start_time && shopData.end_time">Store Timings:{{shopData.start_time | date : 'h:mm a '}} - {{shopData.end_time | date : 'h:mm a '}}</span>
+                                                <br/><span ng-show="shopData.custom_filters.length > 0">Filters: <span  ng-repeat="obj in shopData.custom_filters">{{obj.title}}:<i ng-show="obj.value" class="glyphicon glyphicon-ok" style="color:green;"></i><i ng-show="!obj.value" class="glyphicon glyphicon-remove" style="color:red;"></i></span></span>
+                                                <br/><span ng-show="shopData.custom_fields.length > 0">Fields: <span ng-repeat="extra in shopData.custom_fields">{{extra.field_name}} :
+                                                        <br/>
+
+                                                <span ng-show="extra.field_detail != ' '">{{extra.field_detail}}</span><span ng-show="extra.field_detail == ' '">:N/A</span>
+                                                </span>
+                                                </span>
+                                                <br/><a ng-show="search.postal" href="" ng-click="shoDirections(shopData)">Get Directions</a>
+                                            </div>
+                                        </info-window>
+                                        <directions ng-show="showdirections" draggable="true" panel="directions-panel" travel-mode="{{travelMode}}" origin="{{directionOrigin}}" destination="{{destination}}">
+                                        </directions>
+                                    </ng-map>
+                                </div>
+                                <div ng-if="mapLaodKey" map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load="https://maps.google.com/maps/api/js??libraries=placeses,visualization,drawing,geometry,places&language={{settings.direction_language}}&key=AIzaSyAMLh92ql0g84pRrtn7U4wHnP7WSkboo8E">
+                                    <ng-map zoom="12" center="current-position" style="display:block;height:500px;">
+                                        <marker ng-if="showMarker" id='{{stores.id}}' ng-repeat="stores in positions" position="{{stores.pos}}" title=" {{stores.title}}" ng-model="map.markers" on-click="showDetail(stores)" animation="DROP" style="color:blue;" centered="true"></marker>
+                                        <info-window id="foo-iw" class="{{settings.popup_theme}}">
+                                            <div ng-non-bindable="" class="{{settings.popup_theme}}">
+                                                <b>{{shopData.store_name}}</b>
+                                                <br/>Address: {{shopData.address}}
+                                                <br/>City: {{shopData.city}}
+                                                <br/>State: {{shopData.state}}
+                                                <br/>Country:{{shopData.country}}
+                                                <br/><span ng-show="shopData.postal">Postal :{{shopData.postal}}</span>
+                                                <br/><span ng-show="shopData.phone">Phone:{{shopData.phone}}</span>
+                                                <br/><span ng-show="shopData.fax">Fax:{{shopData.fax}}</span>
+                                                <br/><span ng-show="shopData.website">Website:{{shopData.website}}</span>
+                                                <br/><span ng-show="shopData.working_days.length > 0">Working Days:{{shopData.working_days}}</span>
+                                                <br/>Email :{{shopData.email}}
+                                                <br/><span ng-show="shopData.start_time && shopData.end_time">Store Timings:{{shopData.start_time | date : 'h:mm a '}} - {{shopData.end_time | date : 'h:mm a '}}</span>
+                                                <br/><span ng-show="shopData.custom_filters.length > 0">Filters: <span  ng-repeat="obj in shopData.custom_filters">{{obj.title}}:<i ng-show="obj.value" class="glyphicon glyphicon-ok" style="color:green;"></i><i ng-show="!obj.value" class="glyphicon glyphicon-remove" style="color:red;"></i></span></span>
+                                                <br/><span ng-show="shopData.custom_fields.length > 0">Fields: <span ng-repeat="extra in shopData.custom_fields">{{extra.field_name}} :
+                                                        <br/>
+
+                                                <span ng-show="extra.field_detail != ' '">{{extra.field_detail}}</span><span ng-show="extra.field_detail == ' '">:N/A</span>
+                                                </span>
+                                                </span>
+                                                <br/><a ng-show="search.postal" href="" ng-click="shoDirections(shopData)">Get Directions</a>
+                                            </div>
+                                        </info-window>
+                                        <directions ng-show="showdirections" draggable="true" panel="directions-panel" travel-mode="{{travelMode}}" origin="{{directionOrigin}}" destination="{{destination}}">
+                                        </directions>
+                                    </ng-map>
+                                </div>
+                            </div>
+                            <div ng-show="showdirections" style="width:28%; float:left; height:100%;">
+                                <button class="btn btn-primary col-md-12" ng-click="empty()"> <i class="fa fa-reply p-r-10" ></i> Back to results</button>
+                            </div>
+                            <div ng-show="positions.length > 0 && !showdirections" style="width:28%; float:left; height:100%;">
+                                <label class="btn btn-primary col-md-12"> <i class="glyphicon glyphicon-th-list"></i> Stores List</label>
+                            </div>
+                            <div id="directions-panel" style="width:28%; float:left; height:100%;" ng-show="showdirections">
+                            </div>
+                            <div ng-show="positions && !showdirections" style="width:28%;">
+                                <div id="addresses_list" class="addresses" style="height: 400px">
+                                    <ul style="display: block;">
+                                        <li ng-repeat="stores in positions">
+                                            <div class="distance"></div>
+                                            <a href="" ng-click="showDetail2(stores)">
+                                                <span class="name">{{stores.store_name}}</span>
+                                                <br>
+                                                <span class="address">{{stores.address}}</span>
+                                                <br>
+                                                <span class="city"> {{stores.city}}</span> ,
+                                                <span class="prov_state">{{stores.state}}</span>
+                                                <span ng-show="stores.postal" class="postal_zip">{{stores.postal}}</span> ,
+                                                <span class="country"> {{stores.country}}</span>
+                                            </a </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- /.portlet-body -->
+                    </div>
+                    <!-- /.portlet -->
+                </div>
+                <!-- /. col -->
+            </div>
+            <br class="xs-60">
+            <!-- /.container -->
+        </div>
+        <!-- .content -->
+    </div>
+    <!-- /.content-page -->
+    <footer ng-bind-html="settings.footer ">
+    </footer>
+</div>
+<!-- <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script> -->

@@ -1,0 +1,278 @@
+
+    <section class="content-header">
+        <div class="masthead ng-scope">
+            <h1 class="masthead-subtitle">
+            Select Your Plan
+            </h1>
+        </div>
+    </section>
+    <div ng-class="alerttype" ng-show="showmessage">
+       
+        <strong><h4>{{message}}</h4></strong>
+    </div>
+    <div class="pricing-content-1" ng-init="paymentDetails()">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="price-column-container border-active">
+                    <div class="price-table-head bg-blue">
+                        <h2 class="no-margin">Free (1 Store No Search)</h2>
+                    </div>
+                    <div class="arrow-down border-top-blue"></div>
+                    <div class="price-table-pricing">
+                        <h3>
+                        <span class="price-sign"></span>    FREE</h3>
+                       
+                    </div>
+                    <div class="price-table-content">
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Standard Address Fields</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Add Locations Worldwide</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Powered by Google Maps</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Ultimate Customer Support</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Fully Translatable</div>
+                        </div>
+                    </div>
+                    <div class="arrow-down arrow-grey"></div>
+                    <div class="price-table-footer">
+                        <a class="btn btn-info btn-outline sbold uppercase price-button" type="button" disabled>Default Plan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="price-column-container border-active">
+                    <div class="price-table-head bg-red">
+                        <h2 class="no-margin">Intermediate (2-50 Stores)</h2>
+                    </div>
+                    <div class="arrow-down border-top-red"></div>
+                    <div class="price-table-pricing">
+                        <h3>
+                        <span class="price-sign">$</span>9.99</h3>
+                        <p>per month</p>
+                    </div>
+                    <div class="price-table-content">
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Standard Address Fields</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Add Locations Worldwide</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Powered by Google Maps</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Ultimate Customer Support</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Fully Translatable</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Extra Information Fields</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Address Search</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Search Filters</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Bulk Imports</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Export Stores</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Store Groups</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Stores Timeout</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Customer Lookup</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Hide 'Powered By' message</div>
+                        </div>
+                    </div>
+                    <div class="arrow-down arrow-grey"></div>
+                    <div class="price-table-footer">
+                        <a class="btn btn-red btn-outline price-button sbold uppercase" type="button" ng-disabled = "paymentData.plan == 'Intermediate' || paymentData.plan == 'Advanced'"ng-click="planTwo()">Start Your 10 Day Free Trial</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="price-column-container border-active">
+                    <div class="price-table-head bg-green">
+                        <h2 class="no-margin">Advanced (Unlimited usage)</h2>
+                    </div>
+                    <div class="arrow-down border-top-green"></div>
+                    <div class="price-table-pricing">
+                        <h3>
+                        <span class="price-sign">$</span>19.99</h3>
+                        <p>per month</p>
+                    </div>
+                    <div class="price-table-content">
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Standard Address Fields</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Add Locations Worldwide</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Powered by Google Maps</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Ultimate Customer Support</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Fully Translatable</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Extra Information Fields</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Address Search</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Search Filters</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Bulk Imports</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Export Stores</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Store Groups</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Stores Timeout</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Customer Lookup</div>
+                        </div>
+                        <div class="row mobile-padding">
+                            <div class="col-xs-3 text-right mobile-padding">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">Hide 'Powered By' message</div>
+                        </div>
+                    </div>
+                    <div class="arrow-down arrow-grey"></div>
+                    <div class="price-table-footer">
+                        <a class="btn green price-button sbold uppercase" type="button" ng-disabled = "paymentData.plan == 'Advanced'" ng-click="planThird()">Start Your 10 Day Free Trial</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content-header">
+        <div class="masthead ng-scope">
+            <h5 class="masthead-subtitle">
+            Start your 10 days trial from one of the paid plans,you will not be charged for the first 10 days 
+            </h5>
+        </div>
+    </section>

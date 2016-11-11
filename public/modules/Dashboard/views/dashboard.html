@@ -1,0 +1,355 @@
+<section id="section-features">
+ 
+    <div class="content-page" ng-init="fetchGroups()">
+        <div class="content">
+            <div class="heading-block heading-minimal heading-center homepage-header">
+                <span class="fa fa-home" style="font-size:50px;"></span>
+                <h2>
+       Welcome to Store Locator Pro!
+        </h2>
+                <h4>Lets add your first store with Retail Location Pro</h4>
+            </div>
+            <!-- /.page-header -->
+            <div ng-class="alerttype" role="alert" ng-show="showmessage">
+                <strong>{{message}}</strong>
+            </div>
+            <form class="form-horizontal" name="storeForm">
+                <fieldset class="">
+                    <div class="">
+                        <a href="#/upload" class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-plus"></i> Click here to 
+add a bulk import of locations.</a>
+                        <!-- <button ng-click="add()">add field</button> -->
+                    </div>
+                    <div class="portlet portlet-boxed">
+                        <div class="portlet-header">
+                            <h4 class="portlet-title">
+                                    Step 1 - Basic Details
+                                    </h4>
+                        </div>
+                        <!-- /.portlet-header -->
+                        <div class="portlet-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Store Name: *</label>
+                                <div class="col-md-10">
+                                    <input name="store_name" class="form-control" ng-model="store.store_name" type="text" ng-minlength="3" ng-maxlength="30" required/>
+                                    <span class="customColor" ng-show="storeForm.store_name.$touched && storeForm.store_name.$invalid">Store Name is required.</span>
+                                    <span class="customColor" ng-show="storeForm.store_name.$error.minlength">
+                                            Store Name Too short!</span>
+                                    <span class="customColor" ng-show="storeForm.store_name.$error.maxlength">
+                                            Store Name Too long!</span>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Group Name:</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" ng-model="store.group_name" name="group_list" ng-options="obj._id as obj.group_name for obj in groupName">
+                                        <option value="">Select group name</option>
+                                    </select>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Address: *</label>
+                                <div class="col-md-10">
+                                    <textarea rows="3" cols="5" class="form-control" placeholder="Basic textarea" name="address" ng-model="store.address" required></textarea>
+                                    <span class="customColor" ng-show="storeForm.address.$touched && storeForm.address.$invalid">Address is required.</span>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">City Name: *</label>
+                                <div class="col-md-10">
+                                    <input name="city" class="form-control" ng-model="store.city" type="text" required/>
+                                    <span class="customColor" ng-show="storeForm.city.$touched && storeForm.city.$invalid">City is required.</span>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Select country: *</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" ng-model="store.country" name="country_list" ng-change="getState()" required>
+                                        <option value="">-- Select a Country --</option>
+                                        <option ng-repeat="country in countries" value="{{country}}">{{country.name}}</option>
+                                    </select>
+                                    <span class="customColor" ng-show="storeForm.country_list.$touched && storeForm.country_list.$invalid">Select Country.</span>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Province/State: *</label>
+                                <div class="col-md-10">
+                                    <select ng-model="store.state" name="state_list" class="form-control" required>
+                                        <option value="">Select Province/State</option>
+                                        <option ng-repeat="state in states" value="{{state.name}}" ng-selected="state.name == store.state">{{state.name}}</option>
+                                    </select>
+                                    <span class="customColor" ng-show="storeForm.state_list.$touched && storeForm.state_list.$invalid">Select State.</span>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.form-group -->
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Postal/Zip Code:</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="glyphicon glyphicon-envelope"></i>
+                                        </div>
+                                        <input ng-model="store.postal" type="text" numbers-only max-length='10' class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Phone:</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <input ng-model="store.phone" type="text" class="form-control" phone-input/>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Fax:</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-fax"></i>
+                                        </div>
+                                        <input type="text" ng-model="store.fax" class="form-control" phone-input/>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Email: *</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">@</div>
+                                        <input ng-model="store.email" type="email" class="form-control" name="email" required />
+                                    </div>
+                                    <span class="customColor" ng-show="storeForm.email.$touched && storeForm.email.$invalid">Enter email address.</span>
+                                    <span class="customColor" ng-show=" storeForm.email.$error.email" class="help-block">Enter a valid email address.</span>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Website:</label>
+                                <div class="col-md-10">
+                                    <input ng-model="store.website" type="text" ng-model="store.email" class="form-control" />
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                    </div>
+                    <!-- /.form-group -->
+                     </fieldset>
+        </div>
+        <!-- /.portlet-body -->
+    </div>
+    <!-- /.portlet -->
+   
+    <fieldset class="outerbox">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="portlet portlet-boxed">
+                    <div class="portlet-header">
+                        <h4 class="portlet-title">
+                                    Step 2 - Search Filters (Optional)
+                                    </h4>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-body">
+                        <div ng-class="alerttypefilter" role="alert" ng-show="showmessagefilter">
+                            <strong>{{messagefilter}}</strong>
+                        </div>
+                        <div class="form-group">
+                            <button ng-click="toggle()" class="btn btn-primary btn-sm pull-left">Click to Add New Search Filter</button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group p-t-20">
+                            <div ng-hide="myVar">
+                                <input ng-model="store.filter" type="text" />
+                                <button ng-click="addfilter()" class="btn btn-success btn-sm" ng-disabled="!store.filter">+Add Filter</button>
+                            </div>
+                        </div>
+                        <div class="form-group scroll">
+                            <div class="checkbox " ng-repeat=" fil in filters" value="fil.filter">
+                                <label>
+                                    <input type="checkbox" name="radio-set-1" ng-model="filters[$index].value"> {{ fil.filter }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- /.form-group -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="portlet portlet-boxed">
+                    <div class="portlet-header">
+                        <h4 class="portlet-title">
+                            Step 3 - Extra Fields (Optional)
+                            </h4>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-body">
+                        <div ng-class="alerttypefield" role="alert" ng-show="showmessagefield">
+                            <strong>{{messagefield}}</strong>
+                        </div>
+                        <div class="form-group">
+                            <button ng-click="toggle1()" class="btn btn-primary btn-sm pull-left">Click to Add a new Extra Field</button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group p-t-20">
+                            <div ng-hide="myVar1">
+                                <form name="fieldForm">
+                                    <input ng-model="store.field" name="field" type="text" />
+                                    <button ng-click="addfield()" class="btn btn-success btn-sm" ng-disabled="!store.field">+ Add Field</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <fieldset class="scroll">
+                                <div class="form-group col-sm-6" ng-repeat="fie in fields">
+                                    <label class="control-label">{{ fie.field }}</label>
+                                    <input type="text" ng-model="fields[$index].description">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        </div>
+        <!-- /.portlet-body -->
+        </div>
+        <!-- /.portlet -->
+    </fieldset>
+    <fieldset class="outerbox">
+        <div class="row">
+            <!-- /.portlet-body -->
+            <div class="col-sm-12">
+                <div class="portlet portlet-boxed">
+                    <div class="portlet-header">
+                        <h4 class="portlet-title">
+                        Step 4 - Adjust Store Timings
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="portlet-body col-sm-6">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <span><strong>Working Days: </strong></span>
+                                    <div class="clearfix"></div>
+                                    <label class="pull-left p-r-10 p-b-15" ng-repeat="day in days" style="display:inline-block;">
+                                        <input type="checkbox" name="selectedDays[]" value="{{day}}" ng-checked="workingdaysselection.indexOf(day) != -1" ng-click="editworkingdays(day)"> {{day}}&nbsp;&nbsp;
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="portlet-body col-sm-6">
+                            <div class="form-group p-t-20">
+                                <label><strong>Location Hours: </strong></label>
+                                <div class="clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group row clearfix clockinput">
+                                            <div class="pull-left m-r-20 color">
+                                                <label> <small><u>Starting Hours:</u></small></label>
+                                                <uib-timepicker ng-model="store.start_time" hour-step="1" minute-step="1" show-meridian="true" requiredb></uib-timepicker>
+                                            </div>
+                                            <div class="pull-left color">
+                                                <label><small><u>Closing Hours:</u></small></label>
+                                                <uib-timepicker ng-model="store.end_time" hour-step="1" minute-step="1" show-meridian="true" required></uib-timepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="clearfix"></div>
+                            <!-- /.form-group -->
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.portlet-body -->
+        </div>
+        <!-- /.portlet -->
+    </fieldset>
+    <fieldset class="">
+        <div class="portlet portlet-boxed">
+            <div class="portlet-header">
+                <h4 class="portlet-title">
+                        Step 5 - Adjust Store Location
+                        </h4>
+            </div>
+            <!-- /.portlet-header -->
+            <div class="portlet-body">
+                <!-- /.portlet-header -->
+                <div class="portlet-body">
+                    <div class="">
+                        <div class="form-group" map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load="https://maps.google.com/maps/api/js??libraries=placeses,visualization,drawing,geometry,places&language=en&key=AIzaSyAMLh92ql0g84pRrtn7U4wHnP7WSkboo8E">
+                            <map zoom="12" center="{{address}}" style="display:block;height:500px">
+                                <marker draggable="true" position="[{{store.latitude}},{{store.longitude}}]" on-dragend="click()" title="{{positions.title}}"></marker>
+                            </map>
+                            <!--</div>-->
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Latitude & Longitude: *</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="has-feedback">
+                                        <input ng-model="store.latitude" type="text" class="form-control" placeholder="Latitude" numbers-only required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="has-feedback">
+                                        <input ng-model="store.longitude" type="text" class="form-control input-xlg" placeholder="Longitude" numbers-only required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="">
+                        <button ng-show="!id" ng-click="adddetail()" class="btn btn-primary btn-lg pull-right" ng-disabled="storeForm.$invalid"><i class="fa fa-check p-r-10"></i> Add Store</button>
+                        <button ng-show="id" ng-click="adddetail()" class="btn btn-primary btn-lg pull-right" ng-disabled="storeForm.$invalid"><i class="fa fa-check p-r-10"></i> Update Store</button>
+                        <a class="btn btn-primary btn-lg pull-left" href="#/details">
+                            <i class="fa fa-reply p-r-10"></i> Cancel</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <!-- /.portlet -->
+            </div>
+        </div>
+        <!-- /.portlet-body -->
+    </fieldset>
+    </form>
+    <br class="xs-60">
+    </div>
+    <!-- /.container -->
+    </div>
+    <!-- .content -->
+    </div>
+    <!-- /.content-page -->
+</section>

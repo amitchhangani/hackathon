@@ -1,0 +1,3 @@
+"ID","StoreName","Address","City","State","Country","Postal","Fax","Email","Website","HoursOfOperation","Latitude","Longitude","facebook","TWITTER","test","baby","facebook","TWITTER","test","baby"
+"""57690d4b175e646d1c144667""","Amazon","e-37 , phase-8","Mohali","Punjab","India",160071,2132123132,"paruls@smartdatainc.net","www.google.com",,30.7104586,76.70334709999997,"","@nitesh",true,true,"","@nitesh",true,true
+"""57690de1175e646d1c144670""","Test 2","e-37, phase-8","mohali","Punjab","India",2312311,6786786876,"manojks@smartdatainc.net","www.google.com",,30.7104586,76.70334709999997,"test","",false,true,"test","",false,true

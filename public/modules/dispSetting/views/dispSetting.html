@@ -1,0 +1,294 @@
+<!--Step 1-->
+<div class="page-header clearfix"><h1>Display Settings</h1></div>
+<hr>
+<h3>Basic Styling</h3>
+<br>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Page Title:</label>
+    <div class="col-md-10">
+        <input type="text"  ng-model="info.page_title" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Search Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.text" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Search Default Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.default_text" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Search Button:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.search_button" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Get Directions Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.direction_text" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Display nearest n stores?:</label>
+    <div class="col-md-10">
+        <input type="checkbox" ng-model="info.store" class="form-control">
+    </div>
+</div>
+<br>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Display Nearest store message?:</label>
+    <div class="col-md-10">
+        <input type="checkbox" ng-model="info.store_message" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Nearest n stores:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.nearest_store" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">No Stores Found Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.no_store_found"  class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Map Loads With Results (300 stores or less):</label>
+    <div class="col-md-10">
+        <select ng-model="info.map_load" class="form-control">
+            <option   value="Yes">Yes</option>
+            <option   value="No">No</option>
+        </select>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Initial Text Before Results:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.initial_text" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Max Distance Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.max_distance" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Max Results Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.max_result" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">No Limit Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.no_limit" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">You Are Here Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.here" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Map Height:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.map_height" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Direction Language:</label>
+    <div class="col-md-10">
+        <select ng-model="info.direction_language"  class="form-control">
+            <option value="en">ENGLISH</option>
+            <option value="bg">BULGARIAN</option>
+            <option value="bn">BENGALI</option>
+            <option value="ca">CATALAN</option>
+            <option value="cs">CZECH</option>
+            <option value="da">DANISH</option>
+            <option value="de">GERMAN</option>
+            <option value="el">GREEK</option>
+            <option value="en-AU">ENGLISH (AUSTRALIAN)</option>
+            <option value="ar">ARABIC</option>
+            <option value="en-GB">ENGLISH (GREAT BRITAIN)</option>
+            <option value="es">SPANISH</option>
+            <option value="eu">BASQUE</option>
+            <option value="fa">FARSI</option>
+            <option value="fi">FINNISH</option>
+            <option value="fil">FILIPINO</option>
+            <option value="fr">FRENCH</option>
+            <option value="gl">GALICIAN</option>
+            <option value="gu">GUJARATI</option>
+            <option value="hi">HINDI</option>
+            <option value="hr">CROATIAN</option>
+            <option value="hu">HUNGARIAN</option>
+            <option value="id">INDONESIAN</option>
+            <option value="it">ITALIAN</option>
+            <option value="iw">HEBREW</option>
+            <option value="ja">JAPANESE</option>
+            <option value="kn">KANNADA</option>
+            <option value="ko">KOREAN</option>
+            <option value="lt">LITHUANIAN</option>
+            <option value="lv">LATVIAN</option>
+            <option value="ml">MALAYALAM</option>
+            <option value="mr">MARATHI</option>
+            <option value="nl">DUTCH</option>
+            <option value="no">NORWEGIAN</option>
+            <option value="pl">POLISH</option>
+            <option value="pt">PORTUGUESE</option>
+            <option value="pt-BR">PORTUGUESE (BRAZIL)</option>
+            <option value="pt-PT">PORTUGUESE (PORTUGAL)</option>
+            <option value="ro">ROMANIAN</option>
+            <option value="ru">RUSSIAN</option>
+            <option value="sk">SLOVAK</option>
+            <option value="sl">SLOVENIAN</option>
+            <option value="zh-TW">CHINESE (TRADITIONAL)</option>
+            <option value="sr">SERBIAN</option>
+            <option value="zh-CN">CHINESE (SIMPLIFIED)</option>
+            <option value="sv">SWEDISH</option>
+            <option value="ta">TAMIL</option>
+            <option value="te">TELUGU</option>
+            <option value="th">THAI</option>
+            <option value="tl">TAGALOG</option>
+            <option value="tr">TURKISH</option>
+            <option value="uk">UKRAINIAN</option>
+            <option value="vi">VIETNAMESE</option>
+        </select>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Back to Results Text:</label>
+    <div class="col-md-10">
+        <input type="text" ng-model="info.result_text" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Store Name Colour:</label>
+    <div class="col-md-10">
+        <input colorpicker colorpicker-position="right"colorpicker-with-input="true" type="text" ng-model="info.color" class="form-control">
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Display Website in Address List:</label>
+    <div class="col-md-10">
+        <select ng-model="info.website_address" class="form-control" >
+            <option   value="Yes">Yes</option>
+            <option   value="No">No</option>
+        </select>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Popup Theme:</label>
+    <div class="col-md-10">
+        <select ng-model="info.popup_theme"  class="form-control">
+            <option   value="Light">Light</option>
+            <option   value="Dark">Dark</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">You Icon Colour:</label>
+    <div class="col-md-10">
+        <select ng-model="info.your_icon" class="form-control">
+            <option  value="map-pin-black">Black</option>
+            <option value="map-pin-blue">Blue</option>
+            <option value="map-pin-brown">Brown</option>
+            <option value="map-pin-green">Green</option>
+            <option value="map-pin-grey">Grey</option>
+            <option value="map-pin-lightblue">Light Blue</option>
+            <option value="map-pin-orange">Orange</option>
+            <option value="map-pin-pink">Pink</option>
+            <option value="map-pin-purple">Purple</option>
+            <option value="map-pin-red">Red</option>
+        </select>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Store Icon Colour:</label>
+    <div class="col-md-10">
+        <select ng-model="info.store_icon" class="form-control">
+            <option value="map-pin-black">Black</option>
+            <option value="map-pin-blue">Blue</option>
+            <option value="map-pin-brown">Brown</option>
+            <option value="map-pin-green">Green</option>
+            <option value="map-pin-grey">Grey</option>
+            <option value="map-pin-lightblue">Light Blue</option>
+            <option value="map-pin-orange">Orange</option>
+            <option value="map-pin-pink">Pink</option>
+            <option value="map-pin-purple">Purple</option>
+            <option value="map-pin-red">Red</option>
+        </select>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Measurement Unit:</label>
+    <div class="col-md-10">
+        <select ng-model="info.unit" >
+            <option   value="KM">KM</option>
+            <option   value="MI">MI</option>
+        </select>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Page Header HTML:</label>
+    <div class="col-md-10">
+        <textarea rows="4" cols="50" ng-model="info.header" class="form-control"></textarea>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Page Footer HTML:</label>
+    <div class="col-md-10">
+        <textarea rows="4" cols="50" ng-model="info.footer" class="form-control"></textarea>
+    </div>
+</div>
+<!--Step 2-->
+<br>
+<hr/>
+<h3>Step 2 - Initial Map Positioning </h3>
+<br>
+You can set exactly where you would like the map to start and at what zoom level when customers visit your store locator page.
+<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load="https://maps.google.com/maps/api/js??libraries=placeses,visualization,drawing,geometry,places&language=en&key=AIzaSyAMLh92ql0g84pRrtn7U4wHnP7WSkboo8E">
+<map zoom={{info.map_zoom || 1}}" center="{{info.map_address}}" style="display:block;height:500px" >
+</map>
+</div>
+<br>
+<!--Step 3-->
+<br>
+This is where you configure how your address and detailed information is presented on your store locator screen. The words in [square] brackets are tags and will merge in your actual data. The settings for "Address" will apply to the address listings on the left hand side of the Store Locator and the "Detailed" settings will apply to the information popup bubble on the map.
+<br>
+<br>
+Once you set it how you like click Validate to ensure there are no errors and then click Preview to see what it will look like.
+<br>
+<br>
+Here's a table of all the available tags:
+Information     Tag     Information     Tag
+Store Name  [name]  Postal/Zip Code [postal_zip]
+Address [address]   Phone   [phone]
+Address 2   [address2]  Fax [fax]
+City    [city]  Email   [email]
+Province/State  [prov_state]    Hours of Operations [hours]
+Country [country]   Website *   [website]
+*These tags are only available in the Detailed template
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Address</label>
+    <div class="col-md-10">
+        <textarea rows="4" cols="50" ng-model="info.address" class="form-control"></textarea>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label col-md-2">Detailed</label>
+    <div class="col-md-10">
+        <textarea rows="4" cols="50" ng-model="info.detailed" class="form-control"></textarea>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <button ng-click="addSetting()"  class="btn btn-success" >Save</button>
+</div>

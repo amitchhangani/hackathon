@@ -1,0 +1,221 @@
+<div class="m-t-15" ng-init="getStores()">
+    <div ng-class="alerttype" role="alert" ng-show="showmessage">
+        <strong>{{message}}</strong>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet portlet-boxed">
+                <div class="portlet-header pull-left">
+                    <h4 class="portlet-title">
+               Stores Current Locations & Details
+               </h4>
+                </div>
+                <div class="">
+                    <a type="button" class="btn btn-primary btn-sm pull-right" href="#/details/addDetail"><i class="glyphicon glyphicon-plus"></i> Add Store</a>
+                </div>
+                <!-- /.portlet-header -->
+                <div class="portlet-body">
+                    <table class="table" ng-if="details.length > 0" >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>City</th>
+                                <th>Prov/State</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="detail in details">
+                                <th>{{$index + 1}}</th>
+                                <td>{{ detail.store_name }}</td>
+                                <td>{{detail.city}}</td>
+                                <td>{{detail.state}}</td>
+                                <td><a href="" title="View store address details"  ng-click='showAddress(detail)'><i class="glyphicon glyphicon-map-marker" data-toggle="modal" data-target="#myModal"></i></a></td>
+                                <td>
+                                    <a href="" title="View store details"  ng-click='showDetail(detail)' data-toggle="modal" data-target="#myModalDetail">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                    </a> |
+                                    <a title="Edit store details" href="/#/details/editDetail/{{detail._id}}">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a> |
+                                    <a href="" title="delete store" ng-click="deletedetail(detail._id)">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.portlet-body -->
+            </div>
+            <!-- /.portlet -->
+        </div>
+        <!-- /. col -->
+    </div>
+    <!-- /.row -->
+</div>
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Store Address</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr ng-if="currentStore.storeName">
+                            <td>
+                                <h5>Store Name: {{currentAddress.store_name}}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Address : {{currentAddress.address}}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>City : {{currentAddress.city}}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>State : {{currentAddress.state}}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>country:{{currentAddress.country_name}}</h5>
+                            </td>
+                        </tr>
+                        <tr ng-show="currentStore.postal">
+                            <td>
+                                <h5>Postal : {{currentAddress.postal}}</h5>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModalDetail" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Store Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <table>
+                            <tr ng-if="currentStore.storeName">
+                                <td>
+                                    <h5>Store Name: {{currentStore.store_ame}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show='group'>
+                                <td>
+                                    <h5>Group: {{currentStore.group_name}}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Address : {{currentStore.address}}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>City : {{currentStore.city}}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>State : {{currentStore.state}}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>country:{{currentStore.country_name}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.postal">
+                                <td>
+                                    <h5>Postal : {{currentStore.postal}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.phone">
+                                <td>
+                                    <h5>Phone: {{currentStore.phone}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.email">
+                                <td>
+                                    <h5>Email Id : {{currentStore.email}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.fax">
+                                <td>
+                                    <h5>Fax : {{currentStore.fax}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.website">
+                                <td>
+                                    <h5>Website : {{currentStore.website}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.working_days.length > 0">
+                                <td>
+                                    <h5>Working Days : {{currentStore.working_days.join(',')}}</h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.start_time && currentStore.end_time">
+                                <td>
+                                    <h5>Store Timings : {{currentStore.start_time |date: 'h:mm a' }} - {{currentStore.end_time | date: 'h:mm a' }}</h5></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5><label><u>Filters:</u></label></h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.custom_filters.length > 0" ng-repeat="obj in currentStore.custom_filters">
+                                <td>
+                                    <h5>{{obj.title}}  : <i ng-show="obj.value" class="glyphicon glyphicon-ok" style="color:green;"></i><i ng-show="!obj.value" class="glyphicon glyphicon-remove" style="color:red;"></i> </h5></td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5> <label><u>Extra Fields</u></label></h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="currentStore.custom_fields.length > 0" ng-repeat="extra in currentStore.custom_fields">
+                                <td>
+                                    <h4>{{extra.field_name}}  <span ng-show="extra.field_detail != ''">:{{extra.field_detail}}</span><span ng-show="extra.field_detail == ''">:N/A</span></td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,122 @@
+<header class="navbar" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- /.navbar-header -->
+        <nav class="collapse navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav navbar-right mainnav-menu">
+                <li class="">
+                    <a href="#/dashboard">
+                        <i class="glyphicon glyphicon-home"></i> Home
+                    </a>
+                </li>
+                <li class="dropdown ">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Stores
+                        <i class="fa fa-caret-down navbar-caret"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#/details">
+                                <i class="glyphicon glyphicon-eye-open"></i> View stores
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/details/addDetail">
+                                <i class="glyphicon glyphicon-plus"></i> Create New Store
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/upload">
+                                <i class="glyphicon glyphicon-save"></i> Bulk Import
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" ng-click="bulkExport()">
+                                <i class="glyphicon glyphicon-open"></i> Bulk Export
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#/customerLookup" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <i class="fa fa-search"></i> Proximity
+                    </a>
+                </li>
+                <li class="dropdown ">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <i class="glyphicon glyphicon-cog"></i> Settings
+                        <i class="fa fa-caret-down navbar-caret"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#/showGroups">
+                                <i class="glyphicon glyphicon-plus"></i> Store Groups
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/showFilters">
+                                <i class="fa fa-search"></i> Search Filters
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/showFields">
+                                <i class="glyphicon glyphicon-tasks"></i> Extra Fields
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/display_settings">
+                                <i class="glyphicon glyphicon-blackboard"></i> Display Settings
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown ">
+                    <a href="#/paymentScreen/{{sessionData._id}}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <i class="glyphicon glyphicon-user"></i> Payment Settings
+                      
+                    </a>
+                    
+                </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <i class="glyphicon glyphicon-question-sign"></i>Need Help
+                        <i class="fa fa-caret-down navbar-caret"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#/instruction">
+                                <i class="glyphicon glyphicon-th-list"></i> Instructions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/map_api_key">
+                                <i class="fa fa-google"></i> Google Map Api Key
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/faq">
+                                <i class="fa fa-info"></i> Support & FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/terms">
+                                <i class="glyphicon glyphicon-certificate"></i> Terms & Conditions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/uninstall">
+                                <i class="glyphicon glyphicon-remove"></i> How to uninstall
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- /.container -->
+</header>

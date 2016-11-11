@@ -1,0 +1,82 @@
+
+<div class="mapkey">
+   <div class="masthead">
+	<h1 class="masthead-subtitle"><strong>Bulk Import</strong></h1>
+	</div>
+
+	<div class="top_sec1 upload" class="form-group col-md-12">
+		<input type="button" id="button" value="Browse file"/> 
+		<input  style="opacity:0; position:relative; left:-217px; cursor:pointer" type='file' file-model='obj.myfiles' required>
+		<button class="btn btn-success" type='button' ng-click='fileUpload()'>Upload</button>
+		<div class="clearfix"></div>
+	</div>
+	<div ng-class="alerttype" role="alert" ng-show="showmessage">
+		<strong>{{message}}</strong>
+	</div>
+	<h3> Use Sample Template CSV File</h3>
+	<p>
+		If you have large number of stores and don't want to add them one by one ,don't worry we are here for you, just use our template.csv file, fill in the details and upload it.
+	</p>
+	<div class="btm_dv1 m-b-15">
+		Click <a href="" ng-click="downloadCsv()">HERE</a> to download sample template.csv
+	</div>
+	<div>
+		<div>
+			<h3>Creating Your Own CSV File</h3>
+			<p>
+				Our CSV holds only the basic required fields, if you want to add your filters and fields just add "Filter_" or "Fields_" to your filter/field name and add the new keyword to the template CSV at the 1st line after a comma.  
+ 				
+			</p>
+			<h3>Importing Your Own CSV File</h3>
+			<p>To import your file the file format must be csv format only.The following steps guide you how to save file with csv extention.
+			</p>
+			<p>
+				<strong>1.</strong> Save your spread sheet as a .CSV.  Select the "Save As" option and then select CSV (Comma delimited).
+			</p>
+			<p>
+				<strong>2.</strong> Make sure there is a <strong>.csv</strong> extension after the file name and then click save.
+			</p>
+			
+			<p>
+				Now your file is all ready to import! Browse the file in your respective folder where the csv file is saved.
+			</p>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">CSV upload results</h4>
+      </div>
+      <div class="modal-body">
+	      <div>
+	      <table class="table">
+	      	<tr>
+		      	<th>Store Name</th>
+		      	<th>Message</th>
+	      	</tr>
+	      	<tr ng-repeat="msg in ModalMsg"  class="{{msg.status}}">
+	      		<td>{{msg.store}}</td>
+	      		<td>{{msg.err || 'This store was saved successfully'}} </td>
+	      	</tr>
+	      </table>
+	      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<style type="text/css">
+	.success{
+		background-color: #30f160;
+	}
+	.error{
+		background-color: #fbb0b0;
+	}
+</style>

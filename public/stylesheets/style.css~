@@ -1,0 +1,6 @@
+.row.cutom-row {
+    border: 1px solid;
+    font-size: 22px;
+    margin: 5px;
+    padding: 10px;
+}

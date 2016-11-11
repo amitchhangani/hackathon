@@ -1,0 +1,44 @@
+<div class="masthead">
+    <div class="wrapper">
+        <h1 class="masthead-subtitle heading-block heading-center homepage-header">
+        Login
+        </h1>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.masthead -->
+<div class="content">
+    <div class="container">
+        <br class="xs-30">
+        <div class="account-wrapper">
+            <div class="account-body">
+                <h3>Welcome back to Store Locator Pro</h3>
+                <h5>Please Enter Your Shopify Shop Url.</h5>
+                <form class="form account-form" name="loginForm">
+                    <div ng-class="alerttype" role="alert" ng-show="showmessge">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>{{message}}</strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-username" class="placeholder-hidden">Shop Url</label>
+                        <input type="text" class="form-control" ng-model="name" placeholder="Shop Url" name="shopUrl" required autofocus>
+                        <span class="texterror" ng-show="loginForm.shopUrl.$invalid && loginForm.shopUrl.$touched">
+                                    Please enter valid shop url.
+                                </span>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block btn-lg" tabindex="4" type="submit" ng-click="auth()" ng-disabled="loginForm.$invalid">
+                            Connect Store &nbsp; <i class="fa fa-play-circle"></i>
+                        </button>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
+            <!-- /.account-body -->
+        </div>
+        <!-- /.account-wrapper -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content -->

@@ -1,0 +1,151 @@
+<div class="masthead">
+	<h1 class="masthead-subtitle">
+	<strong>Google Maps API Key Setup</strong>
+	</h1>
+</div>
+<div class="mapkey">
+	<!-- <h2>Google Maps API Key Setup</h2> -->
+	<p>Store Locator Pro uses Google maps to provide you exact location of your Store and Customer Lookups so you need to obtain  a Map API key from Google.
+	</p>
+</div>
+<div class="top_sec1">
+	<span>Click <a onClick="top.window.location.href = 'https://developers.google.com/maps/documentation/geocoding/get-api-key'" >HERE</a> for detailed instructions on how to get your API key.</span>
+</div>
+<!-- <div ng-hide="myVar">
+		<div class="portlet portlet-boxed">
+				<h1>Step 1</h1>
+				
+				<div class="row">
+						<div class="col-sm-4">
+								<img src="../images/1.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Create a new project</h2>
+								<p>Visit the Google Developers Console and login with your Google account. If you do not already have a Google account, you can sign up for an account free.
+										<br>
+								Once logged in, click on the Create Project button to create a new project if you haven't already created one.</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+		</div>
+	<div class="portlet portlet-boxed m-t-15">
+				<div class="row">
+					<h1>Step 2</h1>
+						<div class="col-sm-4">
+								<img src="../images/2.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Enter project information</h2>
+								<p>Fill in the Project Name and Project ID respectively.
+					Don't worry if you're not exactly sure what to enter here, these are not customer facing values so anything will work :-)</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+	<div class="portlet portlet-boxed m-t-15">
+				<div class="row">
+					<h1>Step 3</h1>
+						<div class="col-sm-4">
+								<img src="../images/3.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Enable an API</h2>
+								<p>After creating your new project, you should be directed to the Google Developer Console dashboard. Here you'll be presented with a variety of options. The one we're looking for will be labeled Boost your app with a Google API.
+					Click the Enable an API button below.</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+	<div class="portlet portlet-boxed m-t-15">
+				<div class="row">
+					<h1>Step 4</h1>
+						<div class="col-sm-4">
+								<img src="../images/4.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Select Javascript API v3</h2>
+								<p>ou'll be presented with a list of different options to select from. Scroll down until you find Google Maps Javascript API v3, and click on the OFF button beside it to enable the API.</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+	<div class="portlet portlet-boxed m-t-15">
+				<div class="row">
+					<h1>Step 5</h1>
+						<div class="col-sm-4">
+								<img src="../images/5.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Accept the terms</h2>
+								<p>You will be prompted to accept Google's terms of service. Feel free to read through it, or just click the Accept button below :-)</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+		
+		<div class="portlet portlet-boxed m-t-15">
+				<div class="row">
+					<h1>Step 6</h1>
+						<div class="col-sm-4">
+								<img src="../images/6.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Create a new key</h2>
+								<p>After accepting the terms, you will be directed to another set of options. Look for the Public API access option, and click on the Create new key button below.</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+		
+			<div class="portlet portlet-boxed m-t-15">
+				<div class="row">
+					<h1>Step 7</h1>
+						<div class="col-sm-4">
+								<img src="../images/7.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Select Browser key</h2>
+								<p>A window will pop up asking you which kind of API key you would like to create. Click on the Browser Key option towards the bottom of the window</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+			<div class="portlet portlet-boxed m-b-15 m-t-15 ">
+				<div class="row">
+					<h1>Step 8</h1>
+						<div class="col-sm-4">
+								<img src="../images/8.jpg" alt="Image1 not supported">
+						</div>
+						<div class="col-sm-8">
+								<h2>Copy Google map API key</h2>
+								<p>That's it! You will be given your new map API key which you can find under Key for browser applications section. Simply copy this code and paste it into the API key box above!</p>
+						</div>
+						<div class="clearfix"></div>
+				</div>
+	</div>
+		
+		
+		
+</div> -->
+<span >
+<h2>Google Maps API key</h2></span>
+<div class="btm_dv1">
+	<!-- <span class="spn_contain">
+			* The API key from Google allows for 25,000 map API requests per day. A "request" is anytime the map loads on your site. Keep in mind this is not your entire site in general, just the map page, so it would take a lot of traffic to go over this limit. If your traffic exceeds this any extra charges from Google will be the users responsibility. Here's more information on that.
+	</span> -->
+	<div class="dv_form">
+		<form name="apiForm" id="apiform">
+			<div ng-class="alerttype" role="alert" ng-show="showmessage">
+				<strong>{{message}}</strong>
+			</div>
+			<label class="label1">Enter your Google Maps API key</label>
+			<div class="centeralign p-t-20">
+				<label class="label2 col-md-6">Google Map API key:</label><input type="text" ng-model="key.api_key" name="key" class="form-input col-md-6" required>
+				<span class="customColor" ng-show="apiForm.key.$touched && apiForm.key.$invalid ">API Key is required.</span>
+				{{details}}<br/>
+				<button ng-click="apiForm.$valid && addmapkey()" class="btn2">SAVE</button>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</form>
