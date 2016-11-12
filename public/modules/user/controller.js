@@ -1,5 +1,5 @@
 "use strict"
-hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'NgTableParams',function($scope, $http, $state, $rootScope, NgMap, GeoCoder, NgTableParams) {
+hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'NgTableParams', 'toaster',function($scope, $http, $state, $rootScope, NgMap, GeoCoder, NgTableParams, toaster) {
 	//alert('cityController');
 	$scope.user = {
 		name: '',
@@ -13,12 +13,12 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 		.then(
 			function(response) {				
 				if(response.data.status == 1){
-					console.log("reached here.");
+					toaster.pop('success', "Everything's looking great :)", "user information added to our database.");
 					$scope.getAllUsers();
 					$scope.user = {};
 					$scope.user.role = 'Driver';
 				}else{
-					alert('error while adding user.');
+					toaster.pop('error', "Oops something went wrong.", "error while adding user.");
 				}
 			}
 		);
@@ -27,7 +27,7 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 	
 	//var self = this;
 	/*init ng-tables*/
-	$scope.getAllUsers = function(){
+	$scope.getAllUsers = function(){ 
 		$http.get('/fetchusers').then(function(response) {
 			if(response.data.status == 1) {
 				$scope.tableParams = new NgTableParams({
@@ -42,7 +42,7 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 		            data: response.data.data
 		        });
 			} else {
-				alert('error while adding user.');a
+				toaster.pop('error', "Oops! something went wrong.", "error while fetching user.");
 			}
 		});
 	}
@@ -56,7 +56,8 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 			if(response.data.status == 1) {
 				$scope.vehicleList = response.data.data;
 			} else {
-				alert('error while adding vehicle.');a
+				alert('error while adding vehicle.');
+				toaster.pop('error', "Oops! something went wrong.", "error while fetching vehicles, make sure you have added vehicle information.");
 			}
 		});
 	}

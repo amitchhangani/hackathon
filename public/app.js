@@ -1,7 +1,7 @@
 "use strict";
 //angular.module('city', []);
 
-var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
+var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable', 'toaster', 'ngAnimate'])
 	.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		var checkCity = function($q, $http, $state){
 			console.log('*************************');
@@ -129,6 +129,60 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
 					"": {
 						templateUrl: '/modules/user/views/users.html',
 						controller: "usersController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
+			.state('vehiclestat', {
+				url: "/vehiclestat",
+				views: {
+					"": {
+						templateUrl: '/modules/vehicleStat/views/vehiclestats.html',
+						controller: "vehicleStatsController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
+			.state('reportgarbage', {
+				url: "/reportgarbage",
+				views: {
+					"": {
+						templateUrl: '/modules/reportgarbage/views/report.html',
+						controller: "reportgarbagesController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
+			.state('listreportedgarbage', {
+				url: "/listreportedgarbage",
+				views: {
+					"": {
+						templateUrl: '/modules/reportgarbage/views/map.html',
+						controller: "reportgarbageListsController",
 						resolve: {
 							checkCity: checkCity
 						}

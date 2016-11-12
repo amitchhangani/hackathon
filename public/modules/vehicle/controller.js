@@ -1,30 +1,31 @@
 "use strict"
-hackathon.controller("vehiclesController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'NgTableParams',function($scope, $http, $state, $rootScope, NgMap, GeoCoder, NgTableParams) {
+hackathon.controller("vehiclesController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'NgTableParams', 'toaster',function($scope, $http, $state, $rootScope, NgMap, GeoCoder, NgTableParams, toaster) {
 	//alert('cityController');
 	$scope.vehicle = {};
 	$scope.location = {};
 	$scope.vehicle.type = 'Big Truck';
 	
-	/* ADD City */
+	/*
+     * Add vehicle information in database.
+     * 
+	 */
 	$scope.addvehicle = function(){
 		$http.post('/addvehicle', $scope.vehicle)
 		.then(
 			function(response) {				
 				if(response.data.status == 1){
-					console.log("reached here.");
+					toaster.pop('success', "Everything's looking great :)", "vehicle information added to our database.");
 					$scope.getAllVehicles();
 					$scope.vehicle = {};
 					$scope.vehicle.type = 'Big Truck';
 				}else{
-					alert('error while adding vehicle.');
+					toaster.pop('error', "Oops something went wrong.", "error while adding vehicle.");
 				}
 			}
 		);
 	}
 	
 	
-	//var self = this;
-	var vehicledata = [{name: "Moroni", age: 50} , {name: "Another", age: 23}];	
 	/*init ng-tables*/
 	$scope.getAllVehicles = function(){
 		$http.get('/fetchvehicles').then(function(response) {
@@ -41,7 +42,7 @@ hackathon.controller("vehiclesController", [ '$scope','$http','$state','$rootSco
 		            data: response.data.data
 		        });
 			} else {
-				alert('error while adding vehicle.');a
+				toaster.pop('error', "Oops something went wrong.", "error while getting vehicles, try again in sometime, while we are fixing the problem.");
 			}
 		});
 	}

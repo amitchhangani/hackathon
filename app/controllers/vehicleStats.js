@@ -36,3 +36,29 @@ exports.fetch = function(req,res){
 		}
 	})
 }
+
+/**
+ * add vehicle stats of dumping ground for a particular day
+ * added at the dumping ground / zone by the driver
+ * 
+ */
+exports.add = function(req, res){
+	var cur_date = new Date();
+	cur_date = cur_date.getFullYear() + "-" + (cur_date.getMonth()+1) + "-" + cur_date.getDate();
+	if(!req.body.vehicleId || !req.body.vehicleStatus ){
+		if(!req.body.vehicleId){
+			res.send({status:0, message: "Vehicle Identification failed"});
+		}else if(!req.body.vehicleStatus){
+			res.send({status:0, message:"Vehicle status required"});
+		}
+	} else {
+		VehicleStat({vehicle: req.body.vehicleId, vehicleStatus: req.body.vehicleStatus, date: cur_date}).save(function(err, vehicleStat) {
+			if(err){
+				res.send({status: 0, message: err});
+			}else{
+				res.send({status: 1, message: "success", data: vehicleStat});
+			}
+		});
+	}
+	
+}
