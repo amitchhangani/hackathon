@@ -11,7 +11,9 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 	$scope.initGMap = function(){
 		$scope.types = "['establishment']";
 	}
-	
+	$scope.checkVehicleCapacity = function(vehicle){		
+		return (vehicle.capacity!=vehicle.collectionCenters.length);
+	}
 	$http.get('/fetchvehicles').then(function(res){
 		if(res.data.status ==1)
 		{
@@ -75,6 +77,14 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 						$scope.showNewMarker.val  = false;
 						$scope.address = "";
 						$scope.vehichle = "";
+						for(var i=0; i<$scope.vehicles.length; i++){
+							if($scope.vehicles[i]._id.toString()==postdata.vehicle._id.toString()){
+								if(!$scope.vehicles[i].collectionCenters){
+									$scope.vehicles[i].collectionCenters=[];
+								}
+								$scope.vehicles[i].collectionCenters.push(response.data.data._id);
+							}
+						}
 					}else{
 						toaster.pop('error', "Oops something went wrong.", response.data.message);
 					}

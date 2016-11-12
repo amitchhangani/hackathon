@@ -19,7 +19,7 @@
                         <span class="help-block">**drag the pin in case you want to adjust the location</span>
                         <select ng-model="vehicle" required>
                             <option value="">Please select a vehicle</option>
-                            <option value="{{vcl}}" ng-repeat="vcl in vehicles">
+                            <option value="{{vcl}}" ng-repeat="vcl in vehicles | filter:checkVehicleCapacity">
                                 {{vcl.name}} - {{vcl.type}}
                             </option>
                         </select>

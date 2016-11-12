@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     CollectionCenter = mongoose.model('CollectionCenter'),
-    City = mongoose.model('City');
+    City = mongoose.model('City'),
+    Vehicle = mongoose.model('Vehicle');
 
 
 exports.create = function(req, res){
@@ -32,9 +33,23 @@ exports.create = function(req, res){
 									city.collectionCenters=[];							
 								}
 								city.collectionCenters.push(collectionCenter._id);
-								city.save();
+								city.save(function(err){
+									if(!err){
+										Vehicle.findOne({_id:req.body.vehicle}).exec(function(err,vehicle){
+											if(!err){
+												if(!vehicle.collectionCenters){
+													vehicle.collectionCenters=[];							
+												}
+												if(vehicle.collectionCenters.indexOf(collectionCenter._id)==-1){
+													vehicle.collectionCenters.push(collectionCenter._id);
+													vehicle.save();
+												}												
+											}
+										})
+									}
+								});
 							}
-						})
+						})						
 					}
 				})
 			}
