@@ -1,0 +1,31 @@
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="getAllVehicles()">
+    <section class="content-header">
+        <h1>view optimized vehicle based routes here.<small></small></h1>
+    </section>
+    <section class="content clearfix">
+        <div class="box">
+            <div class="content clearfix">
+                <div class="clearfix row-10">
+                    <div class="mob-grid-6">
+                        <div class="form-group">
+                            <label class="labelColor">Select Vehicle<span class="requiredClass">*</span></label>
+                            <select name="vehicleId" class="form-control mob-grid-12" ng-model="vehicle.vehicleId">
+                                <option value="">Select Vehicle</option>
+                                <option ng-repeat="vehicle in vehicleList" value="{{vehicle._id}}">{{vehicle.name}}</option>
+                            </select>
+                            <span class="hlep-block">** Select a vehicle to display optimized route.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" ng-click="showRoute()">Show Map Routes</button>
+                    </div>
+                </div>
+                <div class="clearfix row-10">
+                    <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13">
+                        
+                    </ng-map>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

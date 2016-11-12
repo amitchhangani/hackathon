@@ -1,0 +1,78 @@
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="initGMap()">
+    <section class="content-header">
+        <h1>City sanitation plan<small>General user garbage location reporting</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Garbage Complain</li>
+        </ol>
+    </section>
+    <section class="content clearfix">
+        <div class="box">
+            <div class="content clearfix">
+                <div>
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            Enter a Location to report a garbage location and click save button : 
+                            <input places-auto-complete size=80
+                            ng-model="address"
+                            component-restrictions="{country:'in'}"
+                            on-place-changed="placeChanged()" />
+                            <span class="help-block">**drag the pin in case you want to adjust the location, please avoid already reported locations.</span>
+                        </div>
+                        <div class="col-md-4 pull-right">
+                            <button class= "btn btn-info" ng-click="reportGarbage()">Report Garbage Location</button>
+                        </div>  
+                        
+                        
+                    </div>
+                    
+                     <div class="row">
+                        <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13">
+                             <marker ng-if="showNewMarker.val" position="{{pinlat}}, {{pinlng}}" 
+                             draggable="true"
+                             on-dragstart="dragStart()"
+                             on-dragend="dragEnd()"
+                             title="Reported Garbage Location"
+                             ></marker>
+                             
+                        </ng-map>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div class="modal fade" id="agencyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Invite an agency</h4>
+            </div>
+            <form name="addAgency" novalidate>
+                <div class="modal-body">
+                     <div class="clearfix row-10">
+                        <div class="mob-grid-6">
+                            <div class="form-group">
+                              <label class="labelColor">Address:</label>
+                            </div>
+                        </div>
+                        <div class="mob-grid-6 no-circle">
+                            <div class="form-group">
+                                <label class="labelColor">{{currentDump.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> Close</button>
+                    <button type="button" class="btn btn-danger" ng-click="delDump()" ng-disabled="addAgency.$invalid"><i class="fa fa-times" ></i> Delete Dump Yard</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

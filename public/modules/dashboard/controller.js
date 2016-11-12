@@ -49,7 +49,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
                 },
                 yAxis: {
                     title: {
-                        text: 'Vehichle load(per day)'
+                        text: 'Vehicle occupied'
                     },
                     plotLines: [{
                         value: 0,
@@ -58,7 +58,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
                     }]
                 },
                 tooltip: {
-                    valueSuffix: '°C'
+                    valueSuffix: 'Full'
                 },
                 legend: {
                     layout: 'vertical',

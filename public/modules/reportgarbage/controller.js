@@ -1,5 +1,5 @@
 "use strict"
-hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'toaster', function($scope, $http, $state, $rootScope, NgMap, GeoCoder, toaster) {
+hackathon.controller("reportgarbagesController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'toaster', function($scope, $http, $state, $rootScope, NgMap, GeoCoder, toaster) {
 	//alert('cityController');
 	$scope.map= {};
 	$scope.location = {};
@@ -14,9 +14,7 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 	}
 	
 	$scope.placeChanged = function() {
-		//console.log('place changed called')
 		$scope.place = this.getPlace();
-		//console.log('location', $scope.place);
 		if ($scope.place.geometry != undefined) {
 			$scope.pinlat = $scope.place.geometry.location.lat();
 			$scope.pinlng = $scope.place.geometry.location.lng();
@@ -35,6 +33,7 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 		$scope.showNewMarker.val  = true;
 	}
 	$scope.dragEnd = function(event) {
+		console.log('dragend called');
 		GeoCoder.geocode({
 			latLng: event.latLng
 		}).then(function(result) {
@@ -51,25 +50,31 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 	});
 	
 	
-	
-	$scope.saveDumpYard = function(){
+	/**
+	 * Garbage reporting by anonymous user
+	 * 
+	 */
+	$scope.reportGarbage = function(){
 		if($scope.address && $scope.pinlng && $scope.pinlat){
-			//console.log($scope.address,$scope.pinlat,$scope.pinlng);
+			console.log($scope.address, $scope.pinlat,$scope.pinlng);
 			var postdata = {};
 			postdata.lat = $scope.pinlat;
-			postdata.long = $scope.pinlng;
-			postdata.name = $scope.address;
+			postdata.lng = $scope.pinlng;
+			postdata.address = $scope.address;
 			postdata.city = $rootScope.city._id;
-			$http.post('/createDumpYard', postdata)
+			$http.post('/reportgarbage', postdata)
 			.then(
 				function(response) {				
 					if(response.data.status == 1){
-						$rootScope.city.dumpYards = response.data.data;
-						toaster.pop('success', "Everything's looking great :)", "dumping yard information added to our database.");
+						//$rootScope.city = response.data.data;
+						//console.log('id = ',$rootScope.city);
+						//$state.go('city');
+						//$rootScope.city.dumpYards = response.data.data;
+						toaster.pop('success', "Everything's looking great :)", "Thank you for taking out time and reporting for garbage, our vehicles are around the corner we will get the garbage in short while.");
 						$scope.showNewMarker.val  = false;
 						$scope.address = "";
 					}else{
-						toaster.pop('error', "Oops something went wrong.", response.data.message);
+						toaster.pop('error', response.data.message, "we are a bit occupied right now please try again in sometime.");
 					}
 				}
 			);
@@ -85,11 +90,11 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 	}
 	
 	$scope.delDump = function(){
-		if($scope.currentDump._id){
+		/*if($scope.currentDump._id){
 			$http.delete('/deleteDumpYard/'+$scope.currentDump._id).then(function (response) {
 				if(response.data.status){
 					$rootScope.city.dumpYards = response.data.data;
-					//console.log('id = ',$rootScope.city);
+					console.log('id = ',$rootScope.city);
 					$scope.showNewMarker.val  = false;
 					$scope.address = "";
 					$rootScope.city = {};
@@ -98,20 +103,48 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 							$rootScope.city = response.data.data;
 							$scope.pinlat = $rootScope.city.lat;
 							$scope.pinlng = $rootScope.city.long;
-							//console.log('id = ',$rootScope.city);
+							console.log('id = ',$rootScope.city);
 							$('#agencyModal').modal('hide');	
 						}else{
 							//$state.go('addCity');
 						}
 					}, function (response) {
-						toaster.pop('error', "Oops something went wrong.", "we are facing some technical problem please try again later.");
+						alert('error while getting api data');
 					})
 				}else{
 					//$state.go('addCity');
 				}
 			}, function (response) {
-				toaster.pop('error', "Oops something went wrong.", "we are facing some technical problem please try again later.");
+				alert('Something went wrong please try again later.');
 			})
-		}
+		}*/
 	}
+}])
+.controller("reportgarbageListsController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'toaster', function($scope, $http, $state, $rootScope, NgMap, GeoCoder, toaster) {
+	//alert('cityController');
+	$scope.map= {};
+	$scope.locations = {};
+	$scope.showNewMarker = {};
+	$scope.showNewMarker.val  = false;
+	
+	
+	/*init gMaps*/
+	$scope.initGMap = function(){
+		$scope.types = "['establishment']";
+		$http.get('reportedgarbagelist').then(function(response) {
+			if(response.data.status == 1){
+				//console.info(response.data.data);
+				$scope.locations = response.data.data;
+			} else {
+				toaster.pop('error', response.data.message, "we are a bit occupied right now please try again in sometime.");
+			}
+		});
+	}
+	
+	
+	NgMap.getMap().then(function(map) {
+		$scope.map = map;
+	});
+	
+	
 }])

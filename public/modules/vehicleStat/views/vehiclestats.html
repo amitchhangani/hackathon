@@ -1,0 +1,37 @@
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="getVehicles()">
+    <section class="content-header">
+        <h1>add dumping ground stats<small></small></h1>
+    </section>
+    <section class="content clearfix">
+        <div class="box">
+            <div class="content clearfix">
+                <div class="clearfix row-10">
+                    <div class="mob-grid-6">
+                        <div class="form-group">
+                            <label class="labelColor">Vehicle Status<span class="requiredClass">*</span></label>
+                            <select name="vehicleStatus" class="form-control mob-grid-12" ng-model="stat.vehicleStatus"  required>
+                                <option value="0">Empty (0 - 10%)</option>
+                                <option value="1">Partially Full (10% - 80%)</option>
+                                <option value="2">Full (80% - 100%)</option>
+                            </select>
+                            <span ng-if="stat.vehicleStatus.$error.required && !stat.vehicleStatus.$pristine" class="help-block requiredClass ng-scope" style="">vehicle status is required.</span>
+                            <span class="hlep-block">** Select a vehicle occupied status.</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelColor">Select Vehicle<span class="requiredClass">*</span></label>
+                            <select name="vehicleId" class="form-control mob-grid-12" ng-model="stat.vehicleId">
+                                <option value="">Select Vehicle</option>
+                                <option ng-repeat="vehiche in vehicleList" value="{{vehiche._id}}">{{vehiche.name}}</option>
+                            </select>
+                            <span ng-if="stat.vehicleId.$error.required && !stat.vehicleId.$pristine" class="help-block requiredClass ng-scope" style="">vehicle association is required.</span>
+                            <span class="hlep-block">** Select a vehical to associate the stat with.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" ng-click="addstat()">Add Stat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

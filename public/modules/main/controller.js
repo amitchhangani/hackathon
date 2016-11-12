@@ -1,8 +1,6 @@
 "use strict"
 hackathon.controller("mainController", [ '$scope','$http','$state','$rootScope',function($scope,$http,$state,$rootScope) {
-	//alert('cityController');
 	$scope.getCityData = function(){
-		console.log('get city data');
 		$http.get('/fetchCity').then(function (response) {
 			if(response.data.data){
 				$rootScope.city = response.data.data;
@@ -19,7 +17,6 @@ hackathon.controller("mainController", [ '$scope','$http','$state','$rootScope',
 	$scope.getCityData();
 	
 	$scope.isActiveState = function(state){
-		console.log(state,' == ',$state.current.name)
 		if(state == $state.current.name){
 			return true;
 		}else{
