@@ -5,78 +5,7 @@ hackathon.controller("cityController", [ '$scope','$http','$state','$rootScope',
 	$scope.location = {};
 	
 
-	//Highchart starts
-	$http({
-      method: 'GET',
-      url: '/fetchvehicles'
-    }).then(function successCallback(vehicles){    	
-        $http({
-          method: 'GET',
-          url: '/fetchVehicleStats'
-        }).then(function successCallback(vehicleStats){
-        	vehicleStats=vehicleStats.data;
-            var cats=[];
-            var catsid=[];
-            vehicles=vehicles.data.data;
-            for(var i=0; i<vehicles.length; i++){
-                cats.push(vehicles[i].name);
-                catsid.push(vehicles[i]._id);
-            }
-            var series=[];
-            var dat={};
-            for(var i=0; i<catsid.length; i++){
-                series.push({name:cats[i]});
-                series[i].data=[];
-                for(var j=0; j<vehicleStats.length; j++){
-                    if(catsid[i].toString()==vehicleStats[j].vehicle._id.toString()){
-                        series[i].data.push(vehicleStats[j].vehicleStatus);
-                        dat[i]=i;
-                    }
-                }
-            }
-            var a=[];
-            for(i in dat){
-                a.push(i);
-            }
-
-            Highcharts.chart('container', {
-              title: {
-                text: 'Temperature Data'
-              },
-
-              xAxis: {
-                    categories: a
-                },
-                yAxis: {
-                    title: {
-                        text: 'Temperature (°C)'
-                    },
-                    plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-                },
-                tooltip: {
-                    valueSuffix: '°C'
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: series
-            });
-        },
-        function errorCallback(err){
-
-        })
-    },
-    function errorCallback(err){
-        
-    })
-    //Highchart ends
+	
 
 	/* ADD City */
 	$scope.addCity = function(){

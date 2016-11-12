@@ -9,31 +9,37 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active">
+        <li ng-class="{'active':isActiveState('dashboard')}" >
+          <a ui-sref="dashboard">
+            <i class="fa fa-dashboard"></i> <span>Reports Dashboard</span>
+          </a>
+        </li>
+        <li ng-class="{'active':isActiveState('city')}">
           <a href="#/">
             <i class="fa fa-dashboard"></i> <span>City</span>
           </a>
         </li>
-        <li >
+        <li ng-class="{'active':isActiveState('addDump')}" >
           <a href="#/addDump">
             <i class="fa fa-dashboard"></i> <span>Add Dump Yard</span>
           </a>
         </li>
-        <li >
+        <li ng-class="{'active':isActiveState('addGC')}" >
           <a href="#/addGC">
             <i class="fa fa-dashboard"></i> <span>Add Garbage Collection Point</span>
           </a>
         </li>
-        <li >
+        <li ng-class="{'active':isActiveState('users')}" >
           <a ui-sref="users">
             <i class="fa fa-dashboard"></i> <span>Users</span>
           </a>
         </li>
-         <li >
+         <li ng-class="{'active':isActiveState('addvehicle')}" >
           <a ui-sref="addvehicle">
             <i class="fa fa-dashboard"></i> <span>Add Vehicles</span>
           </a>
         </li>
+         
       </ul>
     </section>
     <!-- /.sidebar -->

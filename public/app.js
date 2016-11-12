@@ -140,6 +140,24 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable'])
 						templateUrl: '/modules/sidebar/views/sidebar.html',
 					}
 				}
+			})
+			.state('dashboard', {
+				url: "/dashboard",
+				views: {
+					"": {
+						templateUrl: '/modules/dashboard/views/dashboard.html',
+						controller: "dashboardController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
 			});
 
 	}]);

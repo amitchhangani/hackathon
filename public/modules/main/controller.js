@@ -18,4 +18,13 @@ hackathon.controller("mainController", [ '$scope','$http','$state','$rootScope',
 	}
 	$scope.getCityData();
 	
+	$scope.isActiveState = function(state){
+		console.log(state,' == ',$state.current.name)
+		if(state == $state.current.name){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }])
