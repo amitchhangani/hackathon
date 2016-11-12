@@ -1,4 +1,4 @@
-<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="getAllVehicles()">
+<div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="fetchvehiclesWithDumpyards()">
     <section class="content-header">
         <h1>view optimized vehicle based routes here.<small></small></h1>
     </section>
@@ -11,7 +11,7 @@
                             <label class="labelColor">Select Vehicle<span class="requiredClass">*</span></label>
                             <select name="vehicleId" class="form-control mob-grid-12" ng-model="vehicle.vehicleId">
                                 <option value="">Select Vehicle</option>
-                                <option ng-repeat="vehicle in vehicleList" value="{{vehicle._id}}">{{vehicle.name}}</option>
+                                <option ng-repeat="vehicle in vehicleWithDumpyard" value="{{$index}}">{{vehicle.name}}</option>
                             </select>
                             <span class="hlep-block">** Select a vehicle to display optimized route.</span>
                         </div>
@@ -22,21 +22,32 @@
                 </div>
                 <div class="clearfix row-10">
                     <ng-map center="{{pinlat}}, {{pinlng}}" zoom="12">
-                        <!--<directions 
-                          draggable="true"
+                        <directions 
+                          ng-if="destination"
+                          draggable="false"
                           panel="directions-panel"
                           travel-mode="{{travelMode}}"
                           waypoints="{{wayPoints}}"
                           origin="{{origin}}"
                           destination="{{destination}}">
-                        </directions>-->
-                        <marker ng-if="markers" ng-repeat="marker in markers" 
+                        </directions>
+                        <marker ng-if="markersFlag" ng-repeat="marker in markers" 
                             position="{{marker.lat}}, {{marker.long}}" 
                              draggable="false"
                              title="{{marker.name}}"
                              ></marker>
+                        <marker ng-if="dumpyardsFlag" ng-repeat="dump in dumpyards" 
+                            position="{{dump.lat}}, {{dump.long}}" 
+                             draggable="false"
+                             title="{{dump.name}}"
+                             ></marker>
                     </ng-map>
                 </div>
+                <div class="row">
+                  <span class="help-block">Directions path length:
+                  {{map.directionsRenderers[0].directions.routes[0].overview_path.length}}</span>
+                </div>
+                <div ng-show="showDirection" id="directions-panel" style="position: fixed;width: 28%; float:left; height: 250px; overflow: auto; padding: 0px 5px;top: 40%;right: 0;background: #fff;">
             </div>
         </div>
     </section>
