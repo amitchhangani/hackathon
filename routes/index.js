@@ -44,6 +44,8 @@ router.delete('/deleteCollectionCenter/:collectionCenterId',collectionCenter.del
 
 router.post('/addvehicle', vehicle.create);
 router.get('/fetchvehicles', vehicle.fetch);
+router.get('/fetchvehiclesWithDumpyards', vehicle.fetchWithCollection);
+
 
 router.post('/adduser', user.create);
 router.get('/fetchusers', user.fetch);
