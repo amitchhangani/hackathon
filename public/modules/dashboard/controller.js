@@ -3,8 +3,16 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
 	//alert('cityController');
 	$scope.map= {};
 	$scope.location = {};
+	$scope.allVCount = {totalCapacity : 0};
 	
-
+		$http.get('/fetchvehicles').then(function(response) {
+			if(response.data.status == 1) {
+				$scope.allVCount.count = response.data.data.length;
+				for(var i = 0; i < response.data.data.length; i++){
+					$scope.allVCount.totalCapacity = parseInt(response.data.data[i].capacity) +$scope.allVCount.totalCapacity;
+				}
+			}
+		})
 	//Highchart starts
 	$http({
       method: 'GET',

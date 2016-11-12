@@ -61,11 +61,20 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 	
 	
 	$scope.saveGC = function(){
-		if($scope.address && $scope.pinlng && $scope.pinlat && $scope.vehicle){
+		if($scope.address && $scope.pinlng && $scope.pinlat){
+			if(!$scope.vehicle){
+				toaster.pop('error', "Missing vehicle info :(", "Please Select a vehicle to proceed.");
+				return false;
+			}
+			if($scope.sweeperCapacity < 1 ){
+				toaster.pop('error', "Missing required info :(", "A collection center should have at least one sweeper.");
+				return false;
+			}
 			var postdata = {};
 			postdata.lat = $scope.pinlat;
 			postdata.long = $scope.pinlng;
 			postdata.name = $scope.address;
+			postdata.sweeperCapacity = $scope.sweeperCapacity;
 			postdata.vehicle = JSON.parse($scope.vehicle);
 			postdata.city = $rootScope.city._id;
 			$http.post('/createCollectionCenter', postdata)
@@ -77,6 +86,7 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 						$scope.showNewMarker.val  = false;
 						$scope.address = "";
 						$scope.vehichle = "";
+						postdata.sweeperCapacity =null;
 						for(var i=0; i<$scope.vehicles.length; i++){
 							if($scope.vehicles[i]._id.toString()==postdata.vehicle._id.toString()){
 								if(!$scope.vehicles[i].collectionCenters){
@@ -113,6 +123,7 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 					$scope.address = "";
 					$scope.vehichle = "";
 					$rootScope.city = {};
+					postdata.sweeperCapacity =null;
 					$http.get('/fetchCity').then(function (response) {
 						if(response.data.data){
 							$rootScope.city = response.data.data;

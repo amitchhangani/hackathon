@@ -58,6 +58,7 @@ router.get('/addRandomDataToVehicleStat',vehicleStat.addRandomData);
 router.get('/addRandomDataToCollectionPoints',vehicleStat.addRandomDataGC);
 router.get('/fetchVehicleStats',vehicleStat.fetch);
 router.get('/fetchGCStats',vehicleStat.fetchGCStats);
+router.post('/addcpstats',vehicleStat.addcpstats);
 
 
 router.post('/addvehiclestats', vehicleStat.add);

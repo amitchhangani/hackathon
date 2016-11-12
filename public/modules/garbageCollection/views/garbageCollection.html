@@ -23,6 +23,7 @@
                                 {{vcl.name}} - {{vcl.type}}
                             </option>
                         </select>
+                        <input type="number" ng-model="sweeperCapacity" placeholder="maximum sweeper capacity for this collection center" required>
                         <button class= "btn btn-info" ng-click="saveGC()">Save Garbage Collection Point</button>
                     </div>
                     
@@ -49,9 +50,9 @@
                              <custom-marker
                                 id="custom-marker1-{{$index}}"
                                 ng-repeat="gc in $root.city.collectionCenters"
-                                position="{{gc.lat}}, {{gc.long}}">
+                                position="{{gc.lat}}, {{gc.long}}" on-click="showDetail(gc)">
                                   <!--<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg" align="left" /> Hi, How Are You? <br/>-->
-                                  <img src="/img/dump.png" height="15px" title="{{gc.name}}" style="cursor: pointer;">
+                                  <img src="/img/dump.png" height="20px" title="{{gc.name}}" style="cursor: pointer;">
                             </custom-marker>
                         </ng-map>
                      </div>
@@ -67,7 +68,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Invite an agency</h4>
+                <h4 class="modal-title" id="myModalLabel">Garbage collection point details</h4>
             </div>
             <form name="addAgency" novalidate>
                 <div class="modal-body">

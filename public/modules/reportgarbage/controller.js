@@ -83,9 +83,9 @@ hackathon.controller("reportgarbagesController", [ '$scope','$http','$state','$r
 		}
 	}
 	
-	$scope.showDetail = function(e,dump){
-		$scope.currentDump = dump;
-		console.log(dump)
+	$scope.showDetail = function(e,marker){
+		$scope.currentDump = marker;
+		console.log(marker)
 		$('#agencyModal').modal('show');		
 	}
 	
@@ -126,7 +126,19 @@ hackathon.controller("reportgarbagesController", [ '$scope','$http','$state','$r
 	$scope.locations = {};
 	$scope.showNewMarker = {};
 	$scope.showNewMarker.val  = false;
+	$scope.vehicles =[];
 	
+	$http.get('/fetchvehicles').then(function(res){
+		if(res.data.status ==1)
+		{
+			$scope.vehicles = res.data.data;
+			console.log('$scope.vehicles', $scope.vehicles);
+		}else{
+			toaster.pop('error', "Oops something went wrong.", "seems vehicles are missing from our database.");
+		}
+	},function(err){
+		toaster.pop('error', "Oops something went wrong.", "some network error occured, let's try one more time.");
+	});
 	
 	/*init gMaps*/
 	$scope.initGMap = function(){
@@ -145,6 +157,49 @@ hackathon.controller("reportgarbagesController", [ '$scope','$http','$state','$r
 	NgMap.getMap().then(function(map) {
 		$scope.map = map;
 	});
+	$scope.showDetail = function(e,marker){
+		$scope.currentCP = marker;
+		console.log(marker)
+		$('#agencyModal').modal('show');		
+	}
 	
+	$scope.addToCP = function(data){
+		console.log($scope.currentCP.address , $scope.currentCP.lng , $scope.currentCP.lat , $scope.vehicle)
+		if($scope.currentCP.address && $scope.currentCP.lng && $scope.currentCP.lat){
+			if(!$scope.vehicle){
+				toaster.pop('error', "Missing vehicle info :(", "Please Select a vehicle to proceed.");
+				return false;
+			}
+			var postdata = {};
+			postdata.lat = $scope.currentCP.lat;
+			postdata.long = $scope.currentCP.lng;
+			postdata.name = $scope.currentCP.address;
+			postdata.vehicle = JSON.parse($scope.vehicle);
+			postdata.city = $rootScope.city._id;
+			postdata.reportCase = true;
+			postdata.clientId = $scope.currentCP._id;
+			$http.post('/createCollectionCenter', postdata)
+			.then(
+				function(response) {
+					if(response.data.status == 1){
+						$rootScope.city.collectionCenters.push(response.data.data);
+						toaster.pop('success', "Everything's looking great :)", "garbage collection points information added to our database.");
+						$('#agencyModal').modal('hide');
+						setTimeout(function(){
+							$state.go('city');
+						},1)
+						
+						
+					}else{
+						toaster.pop('error', "Oops something went wrong.", response.data.message);
+					}
+				},function(err){
+					toaster.pop('error', "Oops something went wrong.", 'Error while saving garbage collection point. Please try again.');
+				}
+			);
+		}else{
+			toaster.pop('warning', "Oops something went wrong.", "please select a valid address, we have implemented google maps for your ease.");
+		}
+	}
 	
 }])

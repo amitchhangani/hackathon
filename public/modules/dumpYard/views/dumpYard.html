@@ -31,7 +31,7 @@
                              <custom-marker
                                 id="custom-marker-{{$index}}"
                                 ng-repeat="dump in $root.city.dumpYards"
-                                position="{{dump.lat}}, {{dump.long}}">
+                                position="{{dump.lat}}, {{dump.long}}" on-click="showDetail(dump)">
                                   <!--<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg" align="left" /> Hi, How Are You? <br/>-->
                                   <img src="/img/pollution-003-64.png" height="20px" title="{{dump.name}}" style="cursor: pointer;">
                             </custom-marker>

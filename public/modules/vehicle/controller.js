@@ -10,6 +10,7 @@ hackathon.controller("vehiclesController", [ '$scope','$http','$state','$rootSco
      * 
 	 */
 	$scope.addvehicle = function(){
+		$scope.vehicle.city = $rootScope.city._id;
 		$http.post('/addvehicle', $scope.vehicle)
 		.then(
 			function(response) {				

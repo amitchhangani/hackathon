@@ -20,7 +20,7 @@
                             </select>
                             <span ng-if="user.role.$error.required && !user.role.$pristine" class="help-block requiredClass ng-scope" style="">user role is required.</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-if="user.role == 'Driver'">
                             <label class="labelColor">Select Vehicle<span class="requiredClass">*</span></label>
                             <select name="vehicleId" class="form-control mob-grid-12" ng-model="user.vehicleId">
                                 <option value="">Select Vehicle</option>
@@ -29,12 +29,21 @@
                             <span ng-if="user.vehicleId.$error.required && !user.vehicleId.$pristine" class="help-block requiredClass ng-scope" style="">user vehicle association is required.</span>
                             <span class="hlep-block">** Select a vehical to associate the user with.</span>
                         </div>
+                        <div class="form-group" ng-if="user.role == 'Grbage Collector'">
+                            <label class="labelColor">Select Collection Center<span class="requiredClass">*</span></label>
+                            <select name="ccList" class="form-control mob-grid-12" ng-model="user.collectionCenter">
+                                <option value="">Select Garbage Collection Point</option>
+                                <option ng-repeat="cc in $root.city.collectionCenters | filter:checkCCCapacity " value="{{cc._id}}">{{cc.name}}</option>
+                            </select>
+                            <span ng-if="user.ccList.$error.required && !user.ccList.$pristine" class="help-block requiredClass ng-scope" style="">Garbage collection center is required.</span>
+                            <span class="hlep-block">** Select a garbage collection center to associate the user with.</span>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-info" ng-click="adduser()">Add user</button>
+                        <button class="btn btn-info" ng-click="adduser(user.$invalid)">Add user</button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-if="tableDataLength">
                     <table ng-table="tableParams" class="table" show-filter="true">
                         <tr ng-repeat="user in $data">
                             <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">

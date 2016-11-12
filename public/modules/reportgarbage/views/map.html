@@ -13,9 +13,12 @@
                     <div class="row">
                         <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13">
 
-                            <marker ng-if="locations" ng-repeat="marker in locations" position="{{marker.lat}}, {{marker.lng}}" 
-                             draggable="false"
-                             title="{{marker.address}}"
+                            <marker id="custom-{{index}}"
+                                ng-repeat="marker in locations"
+                                position="{{marker.lat}}, {{marker.lng}}" 
+                                draggable="false"
+                                title="{{marker.address}}"
+                                on-click="showDetail(marker)"
                              ></marker>
                              
                         </ng-map>
@@ -27,12 +30,13 @@
 </div>
 
 
+
 <div class="modal fade" id="agencyModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Invite an agency</h4>
+                <h4 class="modal-title" id="myModalLabel">User reported garbage location</h4>
             </div>
             <form name="addAgency" novalidate>
                 <div class="modal-body">
@@ -44,13 +48,37 @@
                         </div>
                         <div class="mob-grid-6 no-circle">
                             <div class="form-group">
-                                <label class="labelColor">{{currentDump.name}}</label>
+                                <label class="labelColor">{{currentCP.address}}</label>
                             </div>
                         </div>
                     </div>
+                     <div class="clearfix row-10">
+                        <h4>Assign a vehicle to this location to add it as a new garbage collection point.</h4>
+                     </div>
+                     <div class="clearfix row-10">
+                        <div class="mob-grid-6">
+                            <div class="form-group">
+                              <label class="labelColor">Vehichle:</label>
+                            </div>
+                        </div>
+                        <div class="mob-grid-6 no-circle">
+                            <div class="form-group">
+                                <!--<label class="labelColor">{{currentCP.address}}</label>-->
+                                <select class="form-group" ng-model="vehicle">
+                                    <option value="">Please select a vehicle </option>
+                                    <option  ng-repeat="vehicles in vehicles" ng-if="vehicles.collectionCenters.length < 4" value='{{vehicles}}'>{{vehicles.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> Close</button>
+                    <button type="button" class="btn btn-info" ng-click="addToCP()" ng-disabled="addAgency.$invalid"><i class="fa fa-plus" ></i> Create new garbage collection point</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 

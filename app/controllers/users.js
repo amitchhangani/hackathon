@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 
 exports.create = function(req, res){
-	if(!req.body.name || !req.body.role || !req.body.vehicleId){
+	if(!req.body.name || !req.body.role || (!req.body.vehicleId && !req.body.collectionCenter)){
 		if(!req.body.name){
 			res.send({status:0, message:"User name required"});
 		}else if(!req.body.role){
@@ -13,6 +13,7 @@ exports.create = function(req, res){
 			res.send({status:0, message:"User can either be a Sweeper or Driver"});
 		}
 	}else{
+        console.log(1);
 		User(req.body).save(function(err, user){
 			if(err){
 				res.send({status:0, message:err});

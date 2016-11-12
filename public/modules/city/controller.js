@@ -20,8 +20,10 @@ hackathon.controller("cityController", [ '$scope','$http','$state','$rootScope',
 				if(response.data.status == 1){
 					$rootScope.city = response.data.data;
 					console.log('id = ',$rootScope.city);
-					$state.go('city');
-					
+					setTimeout(function(){
+						$scope.$apply();
+						$state.go('city');
+					})
 				}else{
 					alert('error while adding city');
 				}

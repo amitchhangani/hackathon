@@ -8,7 +8,11 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 	$scope.vehicleList = {};
 	
 	/* ADD City */
-	$scope.adduser = function(){
+	$scope.adduser = function(invalid){
+		//if(invalid){
+		//	toaster.pop('warning', "in complete form :)", "Please add values to all the fields on form.");
+		//	return;
+		//}
 		$http.post('/adduser', $scope.user)
 		.then(
 			function(response) {				
@@ -29,6 +33,7 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 	/*init ng-tables*/
 	$scope.getAllUsers = function(){ 
 		$http.get('/fetchusers').then(function(response) {
+			$scope.tableDataLength = response.data.data.length;
 			if(response.data.status == 1) {
 				$scope.tableParams = new NgTableParams({
 		            page: 1,
@@ -63,5 +68,9 @@ hackathon.controller("usersController", [ '$scope','$http','$state','$rootScope'
 	}
 
 	$scope.getVehicles();
+	
+	$scope.checkCCCapacity = function(CC){  
+		return (CC.sweeperCapacity != CC.users.length);
+   }
 
 }])

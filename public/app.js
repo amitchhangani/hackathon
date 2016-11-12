@@ -230,6 +230,42 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable', 'to
 						templateUrl: '/modules/sidebar/views/sidebar.html',
 					}
 				}
+			})
+			.state('cpStats', {
+				url: "/cpStats",
+				views: {
+					"": {
+						templateUrl: '/modules/garbageCollectionStat/views/vehiclestats.html',
+						controller: "cpStatsController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
+			.state('hiring', {
+				url: "/hiring",
+				views: {
+					"": {
+						templateUrl: '/modules/hiring/views/hiring.html',
+						controller: "hiringController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
 			});
 
 	}]);

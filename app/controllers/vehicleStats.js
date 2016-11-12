@@ -106,3 +106,30 @@ exports.add = function(req, res){
 		});
 	}
 }
+
+
+exports.addcpstats = function(req,res){
+    var cur_date = new Date();
+	cur_date = cur_date.getFullYear() + "-" + (cur_date.getMonth()+1) + "-" + cur_date.getDate();
+	if(!req.body.cpId || !req.body.cpStatus ){
+		if(!req.body.cpId){
+			res.send({status:0, message: "Vehicle Identification failed"});
+		}else if(!req.body.cpStatus){
+			res.send({status:0, message:"Vehicle status required"});
+		}
+	} else {
+        CollectionCenterStat.find({collectionCenter: req.body.cpId, date: cur_date},function(err,data){
+            if(data.length > 0){
+                 res.send({status: 2, message: 'You have already entered data for today.'});
+            }else{
+                CollectionCenterStat({collectionCenter: req.body.cpId, collectionCenterStatus: req.body.cpStatus, date: cur_date}).save(function(err, cpStats) {
+                    if(err){
+                        res.send({status: 0, message: err});
+                    }else{
+                        res.send({status: 1, message: "success", data: cpStats});
+                    }
+                });
+            }
+        })
+    }
+}

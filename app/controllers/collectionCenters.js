@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     CollectionCenter = mongoose.model('CollectionCenter'),
     City = mongoose.model('City'),
+    ReportGarbage = mongoose.model('ReportGarbage'),
     Vehicle = mongoose.model('Vehicle');
 
 
@@ -29,6 +30,11 @@ exports.create = function(req, res){
 						res.send({status:0,message:err});
 					}else{
 						res.send({status:1,message:"success",data:collectionCenter});
+                        if(req.body.reportCase && req.body.clientId){
+                            ReportGarbage.update({_id : req.body.clientId},{$set:{deleted:1}},function(err,modData){
+                                console.log(err,modData)
+                            });
+                        }
 						City.findOne({_id:req.body.city}).exec(function(err,city){
 							if(!err){
 								if(!city.collectionCenters){
