@@ -16,6 +16,8 @@ exports.create = function(req, res){
 			res.send({status:0,message:"Collection Center City required"});
 		}else if(!req.body.vehicle){
 			res.send({status:0,message:"Collection Center vehicle required"});
+		}else if(!req.body.sweeperCapacity){
+			res.send({status:0,message:"Collection Center Sweeper Capacity required"});
 		}
 	}else{
 		CollectionCenter.findOne({lat:req.body.lat, long:req.body.long,deleted:0}).exec(function(err,col){
@@ -102,6 +104,9 @@ exports.edit = function(req, res){
 		}
 		if(req.body.vehicle){
 			update.vehicle=req.body.vehicle;	
+		}
+		if(req.body.sweeperCapacity){
+			update.sweeperCapacity=req.body.sweeperCapacity;
 		}
 		CollectionCenter.findOne({lat:req.body.lat, long:req.body.long, _id:{$ne:req.params.id}}).exec(function(err,col){
 			if(col.length){

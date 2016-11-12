@@ -79,8 +79,7 @@ exports.fetchGCStats = function(req,res){
             res.send({'message':'success',status:1,data:data});
         }else{
             res.send({'message':'error',status:0,err:err}) ;   
-        }
-        
+        }        
     })
 }
 /**
