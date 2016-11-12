@@ -65,6 +65,10 @@ exports.fetch = function(req, res){
 	if(req.query.id){
 		query._id=req.query.id;
 	}
+	if(req.query.vehicleId) {
+		query.vehicle = req.query.vehicleId;
+	}
+
 	CollectionCenter.find(query,function(err,collectionCenter){
 		if(err){
 			res.send({status:0,message:err});

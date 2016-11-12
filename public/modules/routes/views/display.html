@@ -21,8 +21,20 @@
                     </div>
                 </div>
                 <div class="clearfix row-10">
-                    <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13">
-                        
+                    <ng-map center="{{pinlat}}, {{pinlng}}" zoom="12">
+                        <!--<directions 
+                          draggable="true"
+                          panel="directions-panel"
+                          travel-mode="{{travelMode}}"
+                          waypoints="{{wayPoints}}"
+                          origin="{{origin}}"
+                          destination="{{destination}}">
+                        </directions>-->
+                        <marker ng-if="markers" ng-repeat="marker in markers" 
+                            position="{{marker.lat}}, {{marker.long}}" 
+                             draggable="false"
+                             title="{{marker.name}}"
+                             ></marker>
                     </ng-map>
                 </div>
             </div>
