@@ -40,7 +40,12 @@ exports.fetch = function(req, res){
 }
 
 exports.fetchWithCollection = function(req, res){
-	Vehicle.find({}).populate('collectionCenters',{lat:true,long:true},{deleted:0}).lean().exec(function(err, vehicleData){
+	var collectionCentersFlag = false;
+	var query = {};
+	if(req.query.vehicleId) {
+		query.id = req.query.vehicleId;
+	}
+	Vehicle.find(query).populate('collectionCenters',{lat:true,long:true,name:true},{deleted:0}).lean().exec(function(err, vehicleData){
 		if(err){
 			res.send({status:0,message:err});
 		}else{
@@ -61,7 +66,8 @@ exports.fetchWithCollection = function(req, res){
 										vehicleData[i].center.lats+=parseFloat(vehicleData[i].collectionCenters[j].lat);
 										vehicleData[i].center.longs+=parseFloat(vehicleData[i].collectionCenters[j].long);
 									}
-									if(vehicleData[i].collectionCenters.length){									
+									if(vehicleData[i].collectionCenters.length){			
+										collectionCentersFlag = true;					
 										vehicleData[i].center.lats=vehicleData[i].center.lats/vehicleData[i].collectionCenters.length;
 										vehicleData[i].center.longs=vehicleData[i].center.longs/vehicleData[i].collectionCenters.length;
 										vehicleData[i].dumpyards=findNearestDumpyardsFromAList(vehicleData[i].center,dumpyards)
@@ -70,9 +76,9 @@ exports.fetchWithCollection = function(req, res){
 									}
 								}								
 							}
-							res.send({status:1, message:"success", data:vehicleData});
+							res.send({status:1, message:"success", data:vehicleData, collectionCentersFlag: collectionCentersFlag});
 						}else{
-							res.send({status:1, message:"success", data:vehicleData});
+							res.send({status:1, message:"success", data:vehicleData, collectionCentersFlag: collectionCentersFlag});
 						}
 					}
 				})

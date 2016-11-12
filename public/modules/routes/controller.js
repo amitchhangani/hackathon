@@ -5,47 +5,64 @@ hackathon.controller("routesController", [ '$scope','$http','$state','$rootScope
 	$scope.vehicleList = {};
 	$scope.location = {};
 	$scope.vehicle = {};
-	$scope.wayPoints = [
-          /*{location: {lat:44.32384807250689, lng: -78.079833984375}, stopover: true},
-          {location: {lat:44.55916341529184, lng: -76.17919921875}, stopover: true},*/
-        ];
-    $scope.markers = {};
+	$scope.travelMode = "DRIVING";
+	$scope.wayPoints = [];
+    $scope.showDirection = false;
+    $scope.markers = [];
+    $scope.collectionCentersFlag = false;
+    $scope.dumpyards = [];
+    $scope.dumpyardsFlag = false;
+    $scope.markersFlag = false;
 
 	/*
      * show routes using google map api provided the user vehicle.
      * 
 	 */
 	$scope.showRoute = function(){
-		//
-		if($scope.vehicle.vehicleId) {
-			$http.get('/fetchCollectionCenters?vehicleId=' + $scope.vehicle.vehicleId).then(function(response) {
-				$scope.markers = {};
-				console.info($scope.markers);
-				if(response.data.status == 1) {
-					
-				} else {
-					toaster.pop('error', "Oops something went wrong.", response.data.message);
-				}
-			});
+		if($scope.vehicle.vehicleId >= 0 && $scope.vehicle.vehicleId != '' && $scope.vehicle.vehicleId != undefined) { 
+			if($scope.vehicleWithDumpyard[$scope.vehicle.vehicleId].dumpyards) {
+				toaster.pop('success', "Everything's looking great :)", "please hold your breadth while we get your routes.");
+				angular.forEach($scope.vehicleWithDumpyard[$scope.vehicle.vehicleId].collectionCenters, function(v, k) {
+				//console.log('here...');
+					$scope.wayPoints.push({location: {lat: Number(v.lat), lng: Number(v.long)}, stopover: true});
+				});
+				$scope.origin = $scope.vehicleWithDumpyard[$scope.vehicle.vehicleId].dumpyards.name;
+				$scope.destination = $scope.vehicleWithDumpyard[$scope.vehicle.vehicleId].dumpyards.name;
+				$scope.showDirection = true;
+				$scope.dumpyardsFlag = false;
+	    		$scope.markersFlag = false;
+			} else {
+				toaster.pop('warning', "Dumpyard is missing.", "we did not find any dumping zone for you, please contact admin.");
+			}
 		} else {
-			$http.get('/fetchCollectionCenters').then(function(response) {
-				if(response.data.status == 1) {
-					$scope.markers = response.data.data;
-					console.info($scope.markers);
-				} else {
-					toaster.pop('error', "Oops something went wrong.", response.data.message);
-				}
-			});
+			toaster.pop('warning', "Please select vehicle.", "you need to select a vehicle to optimize the route buddy :)");
+			$scope.dumpyardsFlag = false;
+    		$scope.markersFlag = false;
 		}
 	}
 	
 	
 	/*init ng-tables*/
-	$scope.getAllVehicles = function(){
-		$scope.showRoute();
-		$http.get('/fetchvehicles').then(function(response) {
+	$scope.fetchvehiclesWithDumpyards = function(){
+		//$scope.showRoute();
+		$http.get('/fetchvehiclesWithDumpyards').then(function(response) {
 			if(response.data.status == 1) {
-				$scope.vehicleList = response.data.data;
+				$scope.vehicleWithDumpyard = response.data.data;
+				$scope.collectionCentersFlag = response.data.collectionCentersFlag;
+				angular.forEach(response.data.data, function(value, key) {
+					//console.log(value.collectionCenters, key);
+					angular.forEach(value.collectionCenters, function(v, k) {
+						$scope.markers.push(v);
+					});
+					if(value.dumpyards) {
+						$scope.dumpyards.push(value.dumpyards);
+					}
+
+			    });
+			    //console.info($scope.markers);console.log($scope.dumpyards);
+			    $scope.dumpyardsFlag = true;
+    			$scope.markersFlag = true;
+
 			} else {
 				toaster.pop('error', "Oops something went wrong.", "error while getting vehicles, try again in sometime, while we are fixing the problem.");
 			}
