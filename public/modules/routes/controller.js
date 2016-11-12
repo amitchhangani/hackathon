@@ -37,6 +37,7 @@ hackathon.controller("routesController", [ '$scope','$http','$state','$rootScope
     			$scope.markersFlag = true;
     			$scope.wayPoints = [];
     			$scope.destination = false;
+    			$scope.showDirection = false;
 				toaster.pop('warning', "Dumpyard is missing.", "we did not find any dumping zone for you, please contact admin.");
 			}
 		} else {
@@ -45,6 +46,7 @@ hackathon.controller("routesController", [ '$scope','$http','$state','$rootScope
     		$scope.markersFlag = true;
     		$scope.wayPoints = [];
     		$scope.destination = false;
+    		$scope.showDirection = false;
 		}
 	}
 	
