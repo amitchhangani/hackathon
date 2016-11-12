@@ -90,7 +90,8 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
 			  $http({
 				method: 'GET',
 				url: '/fetchGCStats'
-			  }).then(function successCallback(gcStats){
+			  }).then(function(gcStats){
+					if(gcStats.data.data){
 				  gcStats=gcStats.data.data;
 				  var cats=[];
 				  var catsid=[];
@@ -156,6 +157,9 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
 					},
 					series: series
 				});
+					}else{
+						
+					}
 			});
 	}
 	$scope.getGCStats();
