@@ -19,7 +19,8 @@ hackathon.controller("routesController", [ '$scope','$http','$state','$rootScope
      * 
 	 */
 	$scope.showRoute = function(){
-		if($scope.vehicle.vehicleId >= 0 && $scope.vehicle.vehicleId != '' && $scope.vehicle.vehicleId != undefined) { 
+		if($scope.vehicle.vehicleId >= 0 && $scope.vehicle.vehicleId != '' && $scope.vehicle.vehicleId != undefined) {
+		$scope.wayPoints = []; 
 			if($scope.vehicleWithDumpyard[$scope.vehicle.vehicleId].dumpyards) {
 				toaster.pop('success', "Everything's looking great :)", "please hold your breadth while we get your routes.");
 				angular.forEach($scope.vehicleWithDumpyard[$scope.vehicle.vehicleId].collectionCenters, function(v, k) {
@@ -32,12 +33,18 @@ hackathon.controller("routesController", [ '$scope','$http','$state','$rootScope
 				$scope.dumpyardsFlag = false;
 	    		$scope.markersFlag = false;
 			} else {
+				$scope.dumpyardsFlag = true;
+    			$scope.markersFlag = true;
+    			$scope.wayPoints = [];
+    			$scope.destination = false;
 				toaster.pop('warning', "Dumpyard is missing.", "we did not find any dumping zone for you, please contact admin.");
 			}
 		} else {
 			toaster.pop('warning', "Please select vehicle.", "you need to select a vehicle to optimize the route buddy :)");
-			$scope.dumpyardsFlag = false;
-    		$scope.markersFlag = false;
+			$scope.dumpyardsFlag = true;
+    		$scope.markersFlag = true;
+    		$scope.wayPoints = [];
+    		$scope.destination = false;
 		}
 	}
 	
