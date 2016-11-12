@@ -51,7 +51,9 @@ router.get('/fetchusers', user.fetch);
 
 
 router.get('/addRandomDataToVehicleStat',vehicleStat.addRandomData);
+router.get('/addRandomDataToCollectionPoints',vehicleStat.addRandomDataGC);
 router.get('/fetchVehicleStats',vehicleStat.fetch);
+router.get('/fetchGCStats',vehicleStat.fetchGCStats);
 
 
 module.exports = router;

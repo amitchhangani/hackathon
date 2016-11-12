@@ -22,24 +22,19 @@
                     
                      <div class="row">
                         <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13">
-                            <!--<info-window id="foo-iw">-->
-                            <!--     <div ng-non-bindable="">-->
-                            <!--         <br/>Address: {{currentDump.name}}-->
-                            <!--         <br/><a  ng-click="delDump(shopData)">Delete Dump yard location</a>-->
-                            <!--     </div>-->
-                            <!-- </info-window>-->
                              <marker ng-if="showNewMarker.val" position="{{pinlat}}, {{pinlng}}" 
                              draggable="true"
                              on-dragstart="dragStart()"
                              on-dragend="dragEnd()"
                              title="New Dump Yard"
                              ></marker>
-                             <marker ng-repeat="dumpYard in $root.city.dumpYards"
-                                     position="{{dumpYard.lat}}, {{dumpYard.long}}"
-                                     draggable="false"
-                                     title="{{dumpyard.name}}"
-                                     on-click="showDetail(dumpYard)">
-                             </marker>
+                             <custom-marker
+                                id="custom-marker-{{$index}}"
+                                ng-repeat="dump in $root.city.dumpYards"
+                                position="{{dump.lat}}, {{dump.long}}">
+                                  <!--<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg" align="left" /> Hi, How Are You? <br/>-->
+                                  <img src="/img/pollution-003-64.png" height="20px" title="{{dump.name}}" style="cursor: pointer;">
+                            </custom-marker>
                              
                         </ng-map>
                      </div>

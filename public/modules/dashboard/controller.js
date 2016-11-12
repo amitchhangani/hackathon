@@ -41,7 +41,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
 
             Highcharts.chart('container', {
               title: {
-                text: 'Temperature Data'
+                text: 'Vehicle vise Garbage Trend Analysis'
               },
 
               xAxis: {
@@ -49,7 +49,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature (°C)'
+                        text: 'Vehichle load(per day)'
                     },
                     plotLines: [{
                         value: 0,
@@ -76,30 +76,82 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
     function errorCallback(err){
         
     })
+	
+	
+	$scope.getGCStats = function(){  	
+			  $http({
+				method: 'GET',
+				url: '/fetchGCStats'
+			  }).then(function successCallback(gcStats){
+				  gcStats=gcStats.data.data;
+				  var cats=[];
+				  var catsid=[];
+				  for(var i=0; i<gcStats.length; i++){
+					  cats.push(gcStats[i].gc[0][0].name);
+					  catsid.push(gcStats[i]._id);
+				  }
+				  console.log('cats',cats)
+				  var series=[];
+				  var dat={};
+				  var options = ['full','half','empty'];
+				  for(var i=0; i< options.length; i++){
+					  series.push({name:options[i]});
+					  series[i].data=[];
+					  for(var j=0; j<gcStats.length; j++){
+						if(gcStats[j][options[i]]){
+							series[i].data.push(gcStats[j][options[i]]);							
+						}else{
+							series[i].data.push(0);							
+						}
+						  
+						}
+					  
+				  }
+				  var a=[];
+				  for(i in dat){
+					  a.push(i);
+				  }
+	  
+				  Highcharts.chart('container2', {
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Collection Point based garbage collection'
+					},
+					subtitle: {
+						text: 'garbage collection trend analysis'
+					},
+					xAxis: {
+						categories: cats,
+						crosshair: true
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: 'Counts'
+						}
+					},
+					tooltip: {
+						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+						pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+							'<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+						footerFormat: '</table>',
+						shared: true,
+						useHTML: true
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0
+						}
+					},
+					series: series
+				});
+			});
+	}
+	$scope.getGCStats();
     //Highchart ends
 
-	/* ADD City */
-	$scope.addCity = function(){
-		console.log($scope.map,$scope.details);
-		var postdata = {};
-		postdata.lat = $scope.details.lat;
-		postdata.long = $scope.details.lng;
-		postdata.name = $scope.details.name;
-		$http.post('/createCity', postdata)
-		.then(
-			function(response) {				
-				if(response.data.status == 1){
-					$rootScope.city = response.data.data;
-					console.log('id = ',$rootScope.city);
-					$state.go('city');
-					
-				}else{
-					alert('error while adding city');
-				}
-			}
-		);
-	}
-	
-	
 	
 }])

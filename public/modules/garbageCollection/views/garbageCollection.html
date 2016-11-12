@@ -40,13 +40,19 @@
                              on-dragend="dragEnd()"
                              title="New Dump Yard"
                              ></marker>
-                             <marker ng-repeat="collectionCenters in $root.city.collectionCenters"
-                                     position="{{collectionCenters.lat}}, {{collectionCenters.long}}"
-                                     draggable="false"
-                                     title="{{collectionCenters.name}}"
-                                     on-click="showDetail(collectionCenters)">
-                             </marker>
-                             
+                             <!--<marker ng-repeat="collectionCenters in $root.city.collectionCenters"-->
+                             <!--        position="{{collectionCenters.lat}}, {{collectionCenters.long}}"-->
+                             <!--        draggable="false"-->
+                             <!--        title="{{collectionCenters.name}}"-->
+                             <!--        on-click="showDetail(collectionCenters)">-->
+                             <!--</marker>-->
+                             <custom-marker
+                                id="custom-marker1-{{$index}}"
+                                ng-repeat="gc in $root.city.collectionCenters"
+                                position="{{gc.lat}}, {{gc.long}}">
+                                  <!--<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg" align="left" /> Hi, How Are You? <br/>-->
+                                  <img src="/img/dump.png" height="15px" title="{{gc.name}}" style="cursor: pointer;">
+                            </custom-marker>
                         </ng-map>
                      </div>
                 </div>
