@@ -32,6 +32,8 @@ exports.create = function(req, res){
 									res.send({status:0, message:err});
 								}
 							});
+						}else{
+							res.send({status:0, message:err});
 						}
 					})	
 				}else{

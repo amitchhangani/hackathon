@@ -11,6 +11,8 @@ exports.create = function(req, res){
 			res.send({status:0, message:"Vehicle type required"});
 		}else if(!req.body.capacity){
 			res.send({status:0, message:"Vehicle capacity required"});
+		}else if(!req.body.city){
+			res.send({status:0, message:"Vehicle city required"});
 		}
 	}else{
 		Vehicle(req.body).save(function(err, vehicle){
