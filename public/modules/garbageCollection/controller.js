@@ -108,7 +108,7 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 		if($scope.currentGC._id){
 			$http.delete('/deleteCollectionCenter/'+$scope.currentGC._id).then(function (response) {
 				if(response.data.status){
-					$rootScope.city.dumpYards = response.data.data;
+					$rootScope.city.collectionCenters = response.data.data;
 					console.log('id = ',$rootScope.city);
 					$scope.showNewMarker.val  = false;
 					$scope.address = "";

@@ -1,5 +1,5 @@
 
-<div id="container" style="width:500px; margin-left:500px;>Placeholder for chart</div>
+<!--<div id="container" style="width:500px; margin-left:500px;">Placeholder for chart</div>-->
 <div style="min-height: 276px;" class="content-wrapper ng-scope" ng-init="initGMap()">
     <section class="content-header">
         <h1>City sanitation plan<small>Area division and navigation plan</small></h1>
@@ -19,14 +19,20 @@
                     
                      <div class="row">
                        <ng-map center="{{pinlat}}, {{pinlng}}" zoom="13">
-                   
-                         <marker position="{{pinlat}}, {{pinlng}}" 
-                         draggable="true"
-                         on-dragstart="dragStart()"
-                         on-dragend="dragEnd()"
-                         title="Hello World!"
-                         ></marker>
-                   
+                            <custom-marker
+                                id="custom-marker-{{$index}}"
+                                ng-repeat="dump in $root.city.dumpYards"
+                                position="{{dump.lat}}, {{dump.long}}">
+                                  <!--<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg" align="left" /> Hi, How Are You? <br/>-->
+                                  <img src="/img/dump.png">
+                            </custom-marker>
+                            <custom-marker
+                                id="custom-marker1-{{$index}}"
+                                ng-repeat="gc in $root.city.collectionCenters"
+                                position="{{gc.lat}}, {{gc.long}}">
+                                  <!--<img width="64" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Barack_Obama%2C_2012_portrait_crop.jpg/140px-President_Barack_Obama%2C_2012_portrait_crop.jpg" align="left" /> Hi, How Are You? <br/>-->
+                                  <img src="/img/pollution-003-64.png">
+                            </custom-marker>
                        </ng-map>
                      </div>
                 </div>

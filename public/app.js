@@ -141,6 +141,7 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable', 'to
 					}
 				}
 			})
+<<<<<<< HEAD
 			.state('vehiclestat', {
 				url: "/vehiclestat",
 				views: {
@@ -183,6 +184,24 @@ var hackathon = angular.module('hackathon', ['ui.router','ngMap', 'ngTable', 'to
 					"": {
 						templateUrl: '/modules/reportgarbage/views/map.html',
 						controller: "reportgarbageListsController",
+						resolve: {
+							checkCity: checkCity
+						}
+					},
+					"header": {
+						templateUrl: '/modules/header/views/header.html'
+					},
+					"sidebar": {
+						templateUrl: '/modules/sidebar/views/sidebar.html',
+					}
+				}
+			})
+			.state('dashboard', {
+				url: "/dashboard",
+				views: {
+					"": {
+						templateUrl: '/modules/dashboard/views/dashboard.html',
+						controller: "dashboardController",
 						resolve: {
 							checkCity: checkCity
 						}
