@@ -50,23 +50,23 @@ exports.fetchWithCollection = function(req, res){
 						res.send({status:1, message:"success", data:vehicleData});					
 					}else{
 						if(dumpyards){
-							for(var i=0; i<vehicleData.length; i++){								
-								
+							for(var i=0; i<vehicleData.length; i++){
 								vehicleData[i].center={};
 								vehicleData[i].center.lats=0;
 								vehicleData[i].center.longs=0;
-
-								for(var j=0; j<vehicleData[i].collectionCenters.length; j++){
-									vehicleData[i].center.lats+=parseFloat(vehicleData[i].collectionCenters[j].lat);
-									vehicleData[i].center.longs+=parseFloat(vehicleData[i].collectionCenters[j].long);
-								}
-								if(vehicleData[i].collectionCenters.length){									
-									vehicleData[i].center.lats=vehicleData[i].center.lats/vehicleData[i].collectionCenters.length;
-									vehicleData[i].center.longs=vehicleData[i].center.longs/vehicleData[i].collectionCenters.length;
-									vehicleData[i].dumpyards=findNearestDumpyardsFromAList(vehicleData[i].center,dumpyards)
-								}else{
-									delete vehicleData[i].center;
-								}
+								if(vehicleData[i].collectionCenters){
+									for(var j=0; j<vehicleData[i].collectionCenters.length; j++){
+										vehicleData[i].center.lats+=parseFloat(vehicleData[i].collectionCenters[j].lat);
+										vehicleData[i].center.longs+=parseFloat(vehicleData[i].collectionCenters[j].long);
+									}
+									if(vehicleData[i].collectionCenters.length){									
+										vehicleData[i].center.lats=vehicleData[i].center.lats/vehicleData[i].collectionCenters.length;
+										vehicleData[i].center.longs=vehicleData[i].center.longs/vehicleData[i].collectionCenters.length;
+										vehicleData[i].dumpyards=findNearestDumpyardsFromAList(vehicleData[i].center,dumpyards)
+									}else{
+										delete vehicleData[i].center;
+									}
+								}								
 							}
 							res.send({status:1, message:"success", data:vehicleData});
 						}else{
