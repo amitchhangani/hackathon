@@ -41,7 +41,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
 
             Highcharts.chart('container', {
               title: {
-                text: 'Temperature Data'
+                text: 'Dumping Zone Data'
               },
 
               xAxis: {
@@ -49,7 +49,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature (°C)'
+                        text: 'Vehicle occupied'
                     },
                     plotLines: [{
                         value: 0,
@@ -58,7 +58,7 @@ hackathon.controller("dashboardController", [ '$scope','$http','$state','$rootSc
                     }]
                 },
                 tooltip: {
-                    valueSuffix: '°C'
+                    valueSuffix: 'Full'
                 },
                 legend: {
                     layout: 'vertical',

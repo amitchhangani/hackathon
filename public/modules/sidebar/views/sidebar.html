@@ -1,6 +1,7 @@
 <aside class="main-sidebar ng-scope">
     <!-- sidebar: style can be found in sidebar.less -->
-    <div style="position: relative; overflow: hidden; width: auto; height: 277px;" class="slimScrollDiv"><section style="height: 277px; overflow: hidden; width: auto;" class="sidebar">
+    <div style="position: relative; overflow: hidden; width: auto;" class="slimScrollDiv">
+      <section style="overflow: hidden; width: auto;" class="sidebar">
       <!-- Sidebar user panel -->
       
       <!-- search form -->
@@ -31,27 +32,32 @@
         </li>
         <li ng-class="{'active':isActiveState('users')}" >
           <a ui-sref="users">
-            <i class="fa fa-dashboard"></i> <span>Users</span>
+            <i class="fa fa-users"></i> <span>Users</span>
           </a>
         </li>
          <li ng-class="{'active':isActiveState('addvehicle')}" >
           <a ui-sref="addvehicle">
-            <i class="fa fa-dashboard"></i> <span>Add Vehicles</span>
+            <i class="fa fa-truck"></i> <span>Add Vehicles</span>
           </a>
         </li>
-        <li ng-class="{'active':isActiveState('addvehicle')}" >
+        <li ng-class="{'active':isActiveState('vehiclestat')}" >
           <a ui-sref="vehiclestat">
-            <i class="fa fa-dashboard"></i> <span>Add Vehicle Stats</span>
+            <i class="fa fa-truck"></i> <span>Add Vehicle Stats</span>
           </a>
         </li>
-        <li ng-class="{'active':isActiveState('addvehicle')}" >
+        <li ng-class="{'active':isActiveState('reportgarbage')}" >
           <a ui-sref="reportgarbage">
             <i class="fa fa-dashboard"></i> <span>Report Garbage</span>
           </a>
         </li>
-        <li ng-class="{'active':isActiveState('addvehicle')}" >
+        <li ng-class="{'active':isActiveState('listreportedgarbage')}" >
           <a ui-sref="listreportedgarbage">
             <i class="fa fa-dashboard"></i> <span>User Reported Location</span>
+          </a>
+        </li>
+        <li ng-class="{'active':isActiveState('vehicleroutes')}" >
+          <a ui-sref="vehicleroutes">
+            <i class="fa fa-dashboard"></i> <span>Vehicle Routes</span>
           </a>
         </li>
       </ul>

@@ -1,5 +1,5 @@
 "use strict"
-hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder',function($scope,$http,$state,$rootScope,NgMap,GeoCoder) {
+hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'toaster', function($scope, $http, $state, $rootScope, NgMap, GeoCoder, toaster) {
 	//alert('cityController');
 	$scope.map= {};
 	$scope.location = {};
@@ -14,9 +14,9 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 	}
 	
 	$scope.placeChanged = function() {
-		console.log('place changed called')
+		//console.log('place changed called')
 		$scope.place = this.getPlace();
-		console.log('location', $scope.place);
+		//console.log('location', $scope.place);
 		if ($scope.place.geometry != undefined) {
 			$scope.pinlat = $scope.place.geometry.location.lat();
 			$scope.pinlng = $scope.place.geometry.location.lng();
@@ -35,7 +35,6 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 		$scope.showNewMarker.val  = true;
 	}
 	$scope.dragEnd = function(event) {
-		console.log('dragend called');
 		GeoCoder.geocode({
 			latLng: event.latLng
 		}).then(function(result) {
@@ -55,7 +54,7 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 	
 	$scope.saveDumpYard = function(){
 		if($scope.address && $scope.pinlng && $scope.pinlat){
-			console.log($scope.address,$scope.pinlat,$scope.pinlng);
+			//console.log($scope.address,$scope.pinlat,$scope.pinlng);
 			var postdata = {};
 			postdata.lat = $scope.pinlat;
 			postdata.long = $scope.pinlng;
@@ -65,20 +64,17 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 			.then(
 				function(response) {				
 					if(response.data.status == 1){
-						//$rootScope.city = response.data.data;
-						//console.log('id = ',$rootScope.city);
-						//$state.go('city');
 						$rootScope.city.dumpYards = response.data.data;
-						alert('success');
+						toaster.pop('success', "Everything's looking great :)", "dumping yard information added to our database.");
 						$scope.showNewMarker.val  = false;
 						$scope.address = "";
 					}else{
-						alert('error while adding city');
+						toaster.pop('error', "Oops something went wrong.", response.data.message);
 					}
 				}
 			);
 		}else{
-			alert('Please select a valid address');
+			toaster.pop('warning', "Oops something went wrong.", "please select a valid address, we have implemented google maps for your ease.");
 		}
 	}
 	
@@ -93,7 +89,7 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 			$http.delete('/deleteDumpYard/'+$scope.currentDump._id).then(function (response) {
 				if(response.data.status){
 					$rootScope.city.dumpYards = response.data.data;
-					console.log('id = ',$rootScope.city);
+					//console.log('id = ',$rootScope.city);
 					$scope.showNewMarker.val  = false;
 					$scope.address = "";
 					$rootScope.city = {};
@@ -102,19 +98,19 @@ hackathon.controller("dumpController", [ '$scope','$http','$state','$rootScope',
 							$rootScope.city = response.data.data;
 							$scope.pinlat = $rootScope.city.lat;
 							$scope.pinlng = $rootScope.city.long;
-							console.log('id = ',$rootScope.city);
+							//console.log('id = ',$rootScope.city);
 							$('#agencyModal').modal('hide');	
 						}else{
 							//$state.go('addCity');
 						}
 					}, function (response) {
-						alert('error while getting api data');
+						toaster.pop('error', "Oops something went wrong.", "we are facing some technical problem please try again later.");
 					})
 				}else{
 					//$state.go('addCity');
 				}
 			}, function (response) {
-				alert('Something went wrong please try again later.');
+				toaster.pop('error', "Oops something went wrong.", "we are facing some technical problem please try again later.");
 			})
 		}
 	}

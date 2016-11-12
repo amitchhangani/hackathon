@@ -1,5 +1,5 @@
 "use strict"
-hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder',function($scope,$http,$state,$rootScope,NgMap,GeoCoder) {
+hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','NgMap','GeoCoder', 'toaster', function($scope, $http, $state, $rootScope, NgMap, GeoCoder, toaster) {
 	//alert('cityController');
 	$scope.map= {};
 	$scope.location = {};
@@ -12,24 +12,19 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 		$scope.types = "['establishment']";
 	}
 	
-	console.log('outside')
 	$http.get('/fetchvehicles').then(function(res){
 		if(res.data.status ==1)
 		{
-			
 			$scope.vehicles = res.data.data;
-			//console.log('@@@@@@@@@@@',res);
 		}else{
-			alert('error while fetching vehicle data')
+			toaster.pop('error', "Oops something went wrong.", "seems vehicles are missing from our database.");
 		}
 	},function(err){
-		//console.log('errrr',err);	
+		toaster.pop('error', "Oops something went wrong.", "some network error occured, let's try one more time.");
 	});
 	
 	$scope.placeChanged = function() {
-		//console.log('place changed called')
 		$scope.place = this.getPlace();
-		//console.log('location', $scope.place);
 		if ($scope.place.geometry != undefined) {
 			$scope.pinlat = $scope.place.geometry.location.lat();
 			$scope.pinlng = $scope.place.geometry.location.lng();
@@ -38,7 +33,6 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 			GeoCoder.geocode({
 				address: $scope.address
 			}).then(function(result) {
-				//console.log(result[0].geometry.location.lat());
 				$scope.pinlat = result[0].geometry.location.lat();
 				$scope.pinlng = result[0].geometry.location.lng();
 				$scope.map.setCenter(result[0].geometry.location);
@@ -48,7 +42,6 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 		$scope.showNewMarker.val  = true;
 	}
 	$scope.dragEnd = function(event) {
-		//console.log('dragend called');
 		GeoCoder.geocode({
 			latLng: event.latLng
 		}).then(function(result) {
@@ -56,7 +49,6 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 			$scope.pinlng = result[0].geometry.location.lng();
 			$scope.address = result[0].formatted_address;
 		});
-
 		$scope.showNewMarker.val  = true;
 	}
 	
@@ -68,33 +60,30 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 	
 	$scope.saveGC = function(){
 		if($scope.address && $scope.pinlng && $scope.pinlat && $scope.vehicle){
-			//console.log($scope.address,$scope.pinlat,$scope.pinlng);
 			var postdata = {};
 			postdata.lat = $scope.pinlat;
 			postdata.long = $scope.pinlng;
 			postdata.name = $scope.address;
-			//console.log($scope.vehicle);
 			postdata.vehicle = JSON.parse($scope.vehicle);
 			postdata.city = $rootScope.city._id;
-			//alert('w');
 			$http.post('/createCollectionCenter', postdata)
 			.then(
 				function(response) {
 					if(response.data.status == 1){
 						$rootScope.city.collectionCenters.push(response.data.data);
-						alert('success');
+						toaster.pop('success', "Everything's looking great :)", "garbage collection points information added to our database.");
 						$scope.showNewMarker.val  = false;
 						$scope.address = "";
 						$scope.vehichle = "";
 					}else{
-						alert('error while adding city');
+						toaster.pop('error', "Oops something went wrong.", response.data.message);
 					}
 				},function(err){
-					alert('Error while saving garbage collection point. Please try again. ')
+					toaster.pop('error', "Oops something went wrong.", 'Error while saving garbage collection point. Please try again.');
 				}
 			);
 		}else{
-			alert('Please select a valid address');
+			toaster.pop('warning', "Oops something went wrong.", "please select a valid address, we have implemented google maps for your ease.");
 		}
 	}
 	
@@ -125,13 +114,13 @@ hackathon.controller("gcController", [ '$scope','$http','$state','$rootScope','N
 							//$state.go('addCity');
 						}
 					}, function (response) {
-						alert('error while getting api data');
+						toaster.pop('error', "Oops something went wrong.", "That's unusual would you mind trying again.");
 					})
 				}else{
 					//$state.go('addCity');
 				}
 			}, function (response) {
-				alert('Something went wrong please try again later.');
+				toaster.pop('error', "Oops something went wrong.", "seems the server is bussy to take our request please try again.");
 			})
 		}
 	}
