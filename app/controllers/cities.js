@@ -12,13 +12,11 @@ exports.create = function(req, res){
 			res.send({status:0,message:"City latitude required"});
 		}
 	}else{
-		City(req.body).save(function(err,city){
-			if(err){
-				res.send({status:0,message:err});
-			}else{
-				res.send({status:1,message:"success",data:city});
-			}
-		})
+		City(req.body).save().then((city) => {
+			res.send({status:1,message:"City created successfully",data:city});
+		}).catch((err) => {
+			res.send({status:0,message:err});
+		});
 	}
 }
 
@@ -30,15 +28,12 @@ exports.fetch = function(req, res){
 	if(req.params.cityName){
 		query.name=req.query.cityName;
 	}
-	City.findOne(query).populate("dumpYards",{},{"deleted":0}).populate("collectionCenters",{},{"deleted":0}).exec(function(err,city){
-		if(err){
-			res.send({status:0,message:err});
-		}else{
-			if(city){
-				res.send({status:1,message:"success",data:city});
-			}else{
-				res.send({status:0,message:"No City found",data:city});
-			}			
+	City.findOne(query).populate("dumpYards",{},{"deleted":0}).populate("collectionCenters",{},{"deleted":0}).then((city) => {
+		if(!city){
+			return res.send({status:0,message:"No City found",data:city});
 		}
+		return res.send({status:1,message:"success",data:city});		
+	}).catch((err) => {
+		res.send({status:0,message:err});
 	})
 }
