@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 
 exports.addRandomData = function(req,res){
-	Vehicle.find({}).exec(function(err,vehicle){
+	Vehicle.find({}).then(function(vehicle){
 		var start_date=new Date(req.query.start);
 		var end_date=new Date(req.query.end);
 		var dayInMillis = 86400000;
@@ -20,11 +20,13 @@ exports.addRandomData = function(req,res){
 		}
 		        res.send("success");
 		
+	}).catch(function(err){
+		res.send(err.message || err);
 	})
 }
 
 exports.addRandomDataGC  = function(req,res){
-    CollectionCenter.find({}).exec(function(err,CC){
+    CollectionCenter.find({}).then(function(CC){
 		var start_date=new Date(req.query.start);
 		var end_date=new Date(req.query.end);
 		var dayInMillis = 86400000;
@@ -38,7 +40,9 @@ exports.addRandomDataGC  = function(req,res){
 		}
 		        res.send("success");
 		
-	})
+	}).catch(function(err){
+		res.send(err.message || err);
+	});
 }
 
 function getRandomVehicle(vehicle){
@@ -50,11 +54,13 @@ function getRandomKey(min,max){
 }
 
 exports.fetch = function(req,res){
-	VehicleStat.find({}).populate("vehicle").exec(function(err,vehicleStat){
+	VehicleStat.find({}).populate("vehicle").then(function(vehicleStat){
 		if(!err){
 			res.send(vehicleStat);
 		}
-	})
+	}).catch(function(err){
+		res.send(err.message || err);
+	});
 }
 
 exports.fetchGCStats = function(req,res){
@@ -74,13 +80,16 @@ exports.fetchGCStats = function(req,res){
             empty : {$sum:{$cond: { if: { $eq: [ "$collectionCenterStatus", 0 ] }, then: 1, else: 0 }}},
 
         }}
-    ]).exec(function(err,data){
-        if(!err){
-            res.send({'message':'success',status:1,data:data});
+    ]).then(function(data){
+        if(!data){
+			res.send({'message':'error',status:0}) ;  
+            
         }else{
-            res.send({'message':'error',status:0,err:err}) ;   
+			res.send({'message':'success',status:1,data:data});
         }        
-    })
+    }).catch(function(err){
+		res.send({'message':err.message || err,status:0,err:err}) ;  
+	});
 }
 /**
  * add vehicle stats of dumping ground for a particular day
@@ -97,12 +106,14 @@ exports.add = function(req, res){
 			res.send({status:0, message:"Vehicle status required"});
 		}
 	} else {
-		VehicleStat({vehicle: req.body.vehicleId, vehicleStatus: req.body.vehicleStatus, date: cur_date}).save(function(err, vehicleStat) {
-			if(err){
-				res.send({status: 0, message: err});
+		VehicleStat({vehicle: req.body.vehicleId, vehicleStatus: req.body.vehicleStatus, date: cur_date}).save().then(function( vehicleStat) {
+			if(!vehicleStat){
+				res.send({status: 0, message: 'No vehicle stat found'});
 			}else{
 				res.send({status: 1, message: "success", data: vehicleStat});
 			}
+		}).catch(function(err){
+			res.send({status: 0, message: err.message || err});
 		});
 	}
 }
@@ -122,13 +133,15 @@ exports.addcpstats = function(req,res){
             if(data.length > 0){
                  res.send({status: 2, message: 'You have already entered data for today.'});
             }else{
-                CollectionCenterStat({collectionCenter: req.body.cpId, collectionCenterStatus: req.body.cpStatus, date: cur_date}).save(function(err, cpStats) {
-                    if(err){
-                        res.send({status: 0, message: err});
+                CollectionCenterStat({collectionCenter: req.body.cpId, collectionCenterStatus: req.body.cpStatus, date: cur_date}).save().then(function(cpStats) {
+                    if(!cpStats){
+                        res.send({status: 0, message: 'No cp stat found'});
                     }else{
                         res.send({status: 1, message: "success", data: cpStats});
                     }
-                });
+                }).catch(function(err){
+					res.send({status: 0, message: err.message || err});
+				});
             }
         })
     }
